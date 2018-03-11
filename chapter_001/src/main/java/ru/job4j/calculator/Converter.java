@@ -9,7 +9,7 @@ public class Converter {
      * @return Евро.
      */
     public int rubleToEuro(int value) {
-        this.euro = value / euro;
+        this.euro =  value / euro;
         return this.euro;
     }
     /**
