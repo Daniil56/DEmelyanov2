@@ -1,14 +1,14 @@
 package ru.job4j.calculator;
 
 public class Converter {
-    private int dollar = 60;
-    private int euro = 70;
+    private double dollar = 60;
+    private double euro = 70;
     /**
      * Конвертация рубли в евро.
      * @param value рубли.
      * @return Евро.
      */
-    public int rubleToEuro(int value) {
+    public double rubleToEuro(double value) {
         this.euro =  value / euro;
         return this.euro;
     }
@@ -17,7 +17,7 @@ public class Converter {
      * @param value рубли.
      * @return Доллоры.
      */
-    public int rubleToDollar(int value) {
+    public double rubleToDollar(double value) {
         this.dollar = value / dollar;
         return this.dollar;
     }
@@ -26,7 +26,7 @@ public class Converter {
      * @param value рубли.
      * @return Доллоры.
      */
-    public int dollarToRuble(int value) {
+    public double dollarToRuble(double value) {
         this.dollar = dollar * value;
         return this.dollar;
     }
@@ -35,7 +35,7 @@ public class Converter {
      * @param value рубли.
      * @return Евро.
      */
-    public int euroToRuble(int value) {
+    public double euroToRuble(double value) {
         this.euro = euro * value;
         return this.euro;
     }
