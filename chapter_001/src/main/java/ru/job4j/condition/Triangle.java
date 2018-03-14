@@ -28,11 +28,6 @@ public class Triangle {
     public double period(double ab, double ac, double bc) {
         return (ab + ac + bc) / 2;
     }
-    /**
-     * Метод должен вычислить площадь треугольника.
-     *
-     * @reurn rs1 Вернуть площадь если треугольник существует или - 1 если треугольника нет
-     */
     public double area() {
         double rs1 = -1;
         double ab = this.a.distanceTo(this.b);
@@ -44,19 +39,8 @@ public class Triangle {
         }
         return rs1;
     }
-    /**
-     * Метод проверяет можно ли построить треугольник с такими длинами сторон.
-     *
-     * @param ab Длина от точки a b.
-     * @param ac Длина от точки a c.
-     * @param bc Длина от точки b c.
-     * @return булево условие существоания треуголика
-     */
     private boolean exist(double ab, double ac, double bc) {
-        if (!(((ab + ac) > bc) ? ((ab + bc) > ac) : ((bc + ab) > ac))) {
-            return false;
-        } else {
-            return true;
-        }
+
+        return  (ab < ac + bc && ab < bc + ac &&  ac < bc + ab);
     }
-}
+    }
