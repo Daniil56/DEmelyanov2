@@ -6,7 +6,6 @@ package ru.job4j.loop;
  * @since  13/03/2018
  */
 public class Factorial {
-    private int sum = 1;
 
     /**
      * Метод вычисления факториала n.
@@ -15,6 +14,7 @@ public class Factorial {
      * @return факториал от n
      */
     public int calc(int n) {
+        int sum = 1;
         for (int val = 1; val <= n; val++) {
             if (n % 1 == 0) {
                 sum = val * sum;
