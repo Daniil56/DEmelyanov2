@@ -4,22 +4,20 @@ package ru.job4j.calculator;
  * Программа расчета идеального веса.
  */
 public class Fit {
-    private double weight;
-    private final double idealHeightMan = 100;
-    private final double idealHeightWooman = 110;
-    private final double growthFactor = 1.15;
+    private static final double HEIGH_MAN = 100;
+    private static final double HEIGH_WOOMAN = 110;
+    private static final double GROW_FACTOR = 1.15;
     /**
      * Идеальный вес ля мужчины.
+     *
      * @param height рост.
      * @return идеальный вес.
      */
 
     double manWeight(double height) {
-        return  this.weight = (height - idealHeightMan) * growthFactor;
-
+        return (height - HEIGH_MAN) * GROW_FACTOR;
     }
     double womanWeight(double height) {
-       return this.weight = (height - idealHeightWooman) * growthFactor;
-
+        return (height - HEIGH_WOOMAN) * GROW_FACTOR;
     }
 }
