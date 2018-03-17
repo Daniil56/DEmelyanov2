@@ -8,7 +8,7 @@ public class FindLoopTest {
     @Test
     public void findIndexFiveThenThenArrayTen() {
         FindLoop find = new FindLoop();
-        int result = find.indexOf(new int[10], 5);
+        int result = find.indexOf(new int[] {2, 5, 6, 7, 2, 1}, 5);
         assertThat(result, is(5));
     }
     @Test
