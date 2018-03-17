@@ -4,7 +4,6 @@ public class FindLoop {
     public int indexOf(int[] data, int el) {
         int result = -1;
         for (int index = 0; index < data.length; index++) {
-            data[index] = index;
             if (data[index] == el) {
                 result = index;
                 break;

@@ -9,7 +9,7 @@ public class FindLoopTest {
     public void findIndexFiveThenThenArrayTen() {
         FindLoop find = new FindLoop();
         int result = find.indexOf(new int[] {2, 5, 6, 7, 2, 1}, 5);
-        assertThat(result, is(5));
+        assertThat(result, is(1));
     }
     @Test
     public void findIndexElevenThenThenArrayTen() {
