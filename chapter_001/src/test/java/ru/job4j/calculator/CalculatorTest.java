@@ -15,6 +15,7 @@ public class CalculatorTest {
         double expected = 2D;
         assertThat(result, is(expected));
     }
+    @Test
 
     public void whenSubtractOneMinusOneThenTwo() {
         Calculator calc = new Calculator();
@@ -23,6 +24,7 @@ public class CalculatorTest {
         double expected = 1;
         assertThat(result, is(expected));
     }
+    @Test
 
     public void whenDivOneDivOneThenTwo() {
         Calculator calc = new Calculator();
@@ -31,6 +33,7 @@ public class CalculatorTest {
         double expected = 5D;
         assertThat(result, is(expected));
     }
+    @Test
 
     public void whenMulOneMulOneThenTwo() {
         Calculator calc = new Calculator();
