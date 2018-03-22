@@ -5,9 +5,9 @@ public class Board {
     public  String paint(int weidth, int hight) {
     StringBuilder screen = new StringBuilder();
         final String line = System.getProperty("line.separator");
-    for (int vaH = 1;  vaH <= hight; vaH++) {
-        for (int vaW = 1; vaW <= weidth; vaW++) {
-            int sum = vaH + vaW;
+    for (int in = 1;  in <= hight; in++) {
+        for (int out = 1; out <= weidth; out++) {
+            int sum = in + out;
             if (sum % 2 == 0) {
                 screen.append("X");
             } else {

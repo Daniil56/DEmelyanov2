@@ -1,10 +1,10 @@
 package ru.job4j.array;
 
 public class FindLoop {
-    public int indexOf(int[] data, int el) {
+    public int indexOf(int[] data, int element) {
         int result = -1;
         for (int index = 0; index < data.length; index++) {
-            if (data[index] == el) {
+            if (data[index] == element) {
                 result = index;
                 break;
             }

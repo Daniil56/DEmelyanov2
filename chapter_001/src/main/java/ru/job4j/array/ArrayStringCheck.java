@@ -7,10 +7,10 @@ public class ArrayStringCheck {
         boolean result = true;
         char[] word = origin.toCharArray();
         char[] value = sub.toCharArray();
-            for (int j = 0; j < word.length; j++) {
-                if (word[j] != value[j - count]) {
+            for (int index = 0; index < word.length; index++) {
+                if (word[index] != value[index - count]) {
                     count++;
-                    if (j == value.length - 1) {
+                    if (index == value.length - 1) {
                         result = false;
                         break;
 

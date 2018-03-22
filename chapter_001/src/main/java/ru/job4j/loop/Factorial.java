@@ -15,9 +15,9 @@ public class Factorial {
      */
     public int calc(int n) {
         int sum = 1;
-        for (int val = 1; val <= n; val++) {
+        for (int count = 1; count <= n; count++) {
             if (n % 1 == 0) {
-                sum = val * sum;
+                sum = count * sum;
             }
             }
         return sum;

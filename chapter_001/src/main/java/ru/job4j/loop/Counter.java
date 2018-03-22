@@ -16,9 +16,9 @@ public class Counter {
      * @return Сумма четных чисел в дипозоне от start до finish
      */
     public int add(int start, int finish) {
-        for (int count = start; count <= finish; count++) {
-                if (count % 2 == 0) {
-                    sum =  count + sum;
+        for (int number = start; number <= finish; number++) {
+                if (number % 2 == 0) {
+                    sum =  number + sum;
             }
         }
         return sum;
