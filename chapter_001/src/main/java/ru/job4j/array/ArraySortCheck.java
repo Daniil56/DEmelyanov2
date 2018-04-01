@@ -5,7 +5,7 @@ package ru.job4j.array;
 
 public class ArraySortCheck {
     public  boolean sort(int[] array, boolean reserved) {
-        if (reserved == false) {
+        if (!reserved) {
             for (int i = 0; i < array.length - 1; i++) {
                 if (array[i + 1] < array[i]) {
                     return false;
