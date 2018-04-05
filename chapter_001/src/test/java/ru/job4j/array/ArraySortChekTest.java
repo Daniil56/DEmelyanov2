@@ -9,8 +9,8 @@ public class ArraySortChekTest {
     @Test
     public void isSort() {
         ArraySortCheck s = new ArraySortCheck();
-        boolean result = s.sort(new int[]{1, 2, 3, 4, 5}, false);
-        boolean expectResult = true;
+        int[] result = s.sort(new int[]{5, 4, 3, 2, 1});
+        int[] expectResult = {5, 4, 3, 2, 1 };
         assertThat(result, is(expectResult));
     }
 
