@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.*;
 public class Tracker {
-    private  Item[] items = new Item[100];
+    private Item[] items = new Item[100];
     private int position;
     private static final Random RN = new Random();
 
@@ -11,14 +11,21 @@ public class Tracker {
         this.items[this.position++] = item;
         return item;
     }
+
+    public Item[] getItems() {
+        return items;
+    }
+
     private String generateid() {
 
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
     public Item[] getAll() {
-        Item[] result = new Item[position];
+        Item[] result = new Item[this.position];
         for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
+            if (this.items[index] != null) {
+                result[index] = this.items[index];
+            }
         }
 
         return result;
