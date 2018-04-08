@@ -57,7 +57,9 @@ public class StartUI {
                 String name = this.input.ask("Введите новое имя");
                 String desc = this.input.ask("Введите новое описание");
                 Item replace = new Item(name, desc);
-                tracker.replace(id, replace);
+                this.tracker.add(replace);
+                this.tracker.add(replace);
+                this.tracker.replace(id, replace);
                 System.out.println("-----------Заявка с getID :" + item.getId() + "-----------");
                 System.out.println("-----------Имя заявки :" + item.getName() + "-----------");
                 System.out.println("-----------Описание заявки :" + item.getDescription() + "-----------");
