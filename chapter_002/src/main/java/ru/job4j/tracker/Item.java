@@ -13,7 +13,9 @@ public class Item {
         this.created = created;
     }
 
-    public Item(String name, String desc) {
+    Item(String name, String desc) {
+        this.name = name;
+        this.description = desc;
     }
 
     public void setId(String id) {

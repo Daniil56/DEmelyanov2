@@ -32,7 +32,7 @@ public class Tracker {
     }
     public void replace(String id, Item item) {
         for (int index = 0; index != this.position; index++) {
-            if (item.getId().equals(id)) {
+            if (item.getId().equals(id) && item.getId() != null) {
                 this.items[index] = item;
                 break;
             }
