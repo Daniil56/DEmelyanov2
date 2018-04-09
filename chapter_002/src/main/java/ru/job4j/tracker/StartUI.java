@@ -73,7 +73,7 @@ public class StartUI {
             System.out.println("-----------У Вас нет заявок :" + "-----------");
         } else if (this.tracker.getAll().length != 0) {
             for (Item item : this.tracker.getAll()) {
-                System.out.println("-----------Заявка с идентификатором:" + item.getId() + " -----------");
+                System.out.println("-----------Заявка с идентификатором:" + item.getId() + "-----------");
                 System.out.println("Имя заявки :" + item.getName());
                 System.out.println("Описание заявки :" + item.getDescription());
           }
