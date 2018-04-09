@@ -3,15 +3,32 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
     @Test
     public void whenCreatetingAnItemAnItemIsCreated() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1", "des1");
-        Input input = new ConsoleInput();
-        StartUI startUI = new StartUI(input, tracker);
+        Input input = new StubInput(new String[] {"1", "name", "desc", "0"});
+        new StartUI(input, tracker).init();
+        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(tracker.getAll()[0].getName(), is("name"));
     }
-
+    @Test
+    public void whenUpdateThenTrackerHasUpdateValue() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("name", "desc"));
+        Input input = new StubInput(new String[] {"2", item.getId(), "new_name", "new_desc", "0"});
+        new StartUI(input, tracker).init();
+        assertThat(tracker.findById(item.getId()).getName(), is("new_name"));
+    }
+    @Test
+    public void whenDeleteThenTrackerHasDeleteItem() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("name", "desc"));
+        Input input = new StubInput(new String[] {"3", item.getId(), "0"});
+        new StartUI(input, tracker).init();
+        assertThat(tracker.getAll().length, is(0));
+    }
 }
