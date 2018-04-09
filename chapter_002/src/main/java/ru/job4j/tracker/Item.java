@@ -26,7 +26,7 @@ public class Item {
         return this.id;
     }
 
-    public void setCreated(long created){
+    public void setCreated(long created) {
         this.created = created;
     }
 

@@ -46,7 +46,7 @@ public class StartUI {
     String desc = this.input.ask("Введите описание заявки:");
     Item item = new Item(name, desc);
     this.tracker.add(item);
-    System.out.println("-----------Новая заявка с getID :" + item.getId() +"-----------");
+    System.out.println("-----------Новая заявка с getID :" + item.getId() + "-----------");
     }
     public void editItem() {
         System.out.println("-----------Редактирование заявки-----------");
@@ -58,7 +58,7 @@ public class StartUI {
                 String desc = this.input.ask("Введите новое описание :");
                 Item previus = new Item(name, desc);
                 previus.setId(tracker.getAll()[index].getId());
-              this.tracker.replace(id,previus);
+              this.tracker.replace(id, previus);
                 System.out.println("-----------Заявка с getID :" + tracker.getAll()[index].getId() + " изменена-----------");
                 System.out.println("-----------Имя заявки :" + tracker.getAll()[index].getName() + " -----------");
                 System.out.println("-----------Описание заявки :" + tracker.getAll()[index].getDescription() + "-----------");
@@ -82,13 +82,13 @@ public class StartUI {
         public void deleteItem() {
             System.out.println("-----------Удаление заявки-----------");
             String id = this.input.ask("Введите идентификатор заявки:");
-            for (Item item : tracker.getAll())
+            for (Item item : tracker.getAll()) {
                 if (item.getId().equals(id) && item.getId() != null) {
                     this.tracker.delete(id);
                     System.out.println("Заявка с идентификатором :" + item.getId() + " удалена.");
                 } else {
                     System.out.println("Заявка с идентификатором :" + id + " не найдена.");
-
+                }
                 }
         }
         public void findById() {
