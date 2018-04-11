@@ -8,7 +8,7 @@ public class StartUITest {
     @Test
     public void whenCreatetingAnItemAnItemIsCreated() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"1", "name", "desc", "y"});
+        Input input = new StubInput(new String[]{"1", "name", "desc", "д"});
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.getAll()[0].getName(), is("name"));
@@ -17,7 +17,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdateValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "new_name", "new_desc", "y"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "new_name", "new_desc", "д"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("new_name"));
     }
@@ -25,7 +25,7 @@ public class StartUITest {
     public void whenDeleteThenTrackerHasDeleteItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
+        Input input = new StubInput(new String[]{"4", item.getId(), "д"});
         new StartUI(input, tracker).init();
         assertThat(tracker.getAll().length, is(0));
     }
