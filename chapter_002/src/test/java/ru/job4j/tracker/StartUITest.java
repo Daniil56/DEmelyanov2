@@ -17,7 +17,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdateValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        Input input = new StubInput(new String[]{"3", item.getId(), "new_name", "new_desc", "д"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "new_name", "new_desc", "д"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("new_name"));
     }

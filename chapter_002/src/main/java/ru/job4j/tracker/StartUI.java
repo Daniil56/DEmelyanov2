@@ -10,8 +10,7 @@ public class StartUI {
     this.tracker = tracker;
     }
     public void init() {
-        Tracker tracker = new Tracker();
-        MenuTracker menu = new MenuTracker(this.input, tracker);
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
         do {
     menu.show();
