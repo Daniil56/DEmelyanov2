@@ -20,4 +20,24 @@ public class Cell {
     public void setY(int y) {
         this.y = y;
     }
+
+  @Override
+    public int hashCode() {
+        return 31 * x + y;
+   }
+   @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Cell cell = (Cell) obj;
+       return (this.x == cell.x) && (this.y == cell.y);
+   }
+
 }

@@ -20,7 +20,7 @@ public class BishopTest {
         Cell[] actualArray = bishop.way(c1, c2);
         assertThat(actualArray, is(expectArray));
     }
-    @Test
+    @Test(expected = ImposableMoveException.class)
     public void whenBishopWayWhenExceptionMovement() {
         Cell c1 = new Cell(2, 1);
         Cell c2 = new Cell(7, 4);
@@ -28,6 +28,7 @@ public class BishopTest {
         Cell c4 = new Cell(4, 3);
 
         Figure bishop = new Bishop(c1);
+        System.out.print(c1.hashCode());
         Cell[] expectArray = new Cell[] {c3, c4, c2};
         Cell[] actualArray = bishop.way(c1, c2);
         assertThat(actualArray, is(expectArray));
@@ -38,6 +39,6 @@ public class BishopTest {
         Cell c2 = new Cell(6, 4);
         Bishop bishop = new Bishop(c1);
         Bishop next = new Bishop(c2);
-        assertThat(bishop.copy(c2), is(next));
+        assertThat(bishop.copy(c2).position, is(next.position));
     }
 }
