@@ -20,8 +20,4 @@ public class Cell {
     public void setY(int y) {
         this.y = y;
     }
-    public int distance(Cell that) {
-        return (int) Math.sqrt(Math.pow(this.y - that.y, 2) + Math.pow(this.x - that.x, 2));
-
-    }
 }
