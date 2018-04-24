@@ -7,7 +7,7 @@ public abstract class Figure {
         this.position = position;
     }
 
-    public  abstract Cell[] way(Cell source, Cell dest)
+    public abstract Cell[] way(Cell source, Cell dest)
             throws  ImposableMoveException;
 
     public abstract Figure copy(Cell dest);
