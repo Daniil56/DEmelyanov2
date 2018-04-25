@@ -10,7 +10,7 @@ public class AutomateTest {
     public void when100Get75() {
         Automate auto = new Automate();
         int[] expect = new int[] {50,  10, 10, 5};
-        assertThat(auto.changes(100, 35
+        assertThat(auto.changes(1000, 35
         ), is(expect));
     }
 }
