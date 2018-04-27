@@ -1,16 +1,17 @@
-package ru.job4j.Coffe;
+package ru.job4j.coffe;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.*;
 
-public class AutomateTest {
+public class ChangeMoneyTest {
     @Test
     public void when100Get75() {
-        Automate auto = new Automate();
+        ChangeMoney auto = new ChangeMoney();
         int[] expect = new int[] {50,  10, 10, 5};
-        assertThat(auto.changes(1000, 35
+        assertThat(auto.changes(100, 25
         ), is(expect));
     }
+
 }
