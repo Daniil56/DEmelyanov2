@@ -11,7 +11,7 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"1", "name", "desc", "д"});
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.getAll()[0].getName(), is("name"));
+        assertThat(tracker.getAll().get(0).getName(), is("name"));
     }
     @Test
     public void whenUpdateThenTrackerHasUpdateValue() {
@@ -27,6 +27,6 @@ public class StartUITest {
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[]{"4", item.getId(), "д"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.getAll().length, is(0));
+        assertThat(tracker.getAll().size(), is(0));
     }
     }

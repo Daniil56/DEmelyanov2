@@ -1,4 +1,8 @@
 package ru.job4j.tracker;
+
+import java.util.ArrayList;
+import java.util.List;
+
 class ShowItems extends BaseAction {
     ShowItems(int key, String name) {
         super(key, name);
@@ -7,9 +11,9 @@ class ShowItems extends BaseAction {
     @Override
     public void execute(Input input, Tracker tracker) {
         System.out.println("-----------Проссмотр всех заявок-----------");
-        if (tracker.getAll().length == 0) {
+        if (tracker.getAll().size() == 0) {
             System.out.println("-----------У Вас нет заявок :" + "-----------");
-        } else if (tracker.getAll().length != 0) {
+        } else if (tracker.getAll().size() != 0) {
             for (Item item : tracker.getAll()) {
                 System.out.println("-----------Заявка с идентификатором:" + item.getId() + "-----------");
                 System.out.println("Имя заявки :" + item.getName());
@@ -24,22 +28,25 @@ public class MenuTracker {
     private Input input;
     private Tracker tracker;
     private  int position = 0;
-    private UserAction[] actions = new UserAction[7];
+    private List<UserAction> actions = new ArrayList<>();
 
     MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
 
-    public void fillActions() {
-        this.actions[position++] = new Exit(0, "Выход.");
-        this.actions[position++] = new Add(1, "Добавить новую заявку");
-        this.actions[position++] = new MenuTracker.Edit(2, "Редактировать заявку.");
-        this.actions[position++] = new ShowItems(3, "Показать все заявки");
-        this.actions[position++] = new Delete(4, "Удалить заявку.");
-        this.actions[position++] = new FindBuID(5, "Найти заявку по идентификатору.");
-        this.actions[position++] = new FindByName(6, "Найти заявку по имени.");
+    public int fillActions() {
+        int count = 0;
+        this.actions.add(count, new Exit(count++, "Выход."));
+        this.actions.add(count, new Add(count++, "Добавить новую заявку"));
+        this.actions.add(count, new Edit(count++, "Редактировать заявку."));
+        this.actions.add(count, new ShowItems(count++, "Показать все заявки"));
+        this.actions.add(count, new Delete(count++, "Удалить заявку."));
+        this.actions.add(count, new FindBuID(count++, "Найти заявку по идентификатору."));
+        this.actions.add(count, new FindByName(count++, "Найти заявку по имени."));
+        return count;
     }
+
 
     public void show() {
         for (UserAction action : this.actions) {
@@ -49,7 +56,7 @@ public class MenuTracker {
         }
     }
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
     private class Exit extends BaseAction {
         Exit(int key, String name) {
@@ -79,23 +86,11 @@ public class MenuTracker {
         }
 
         public void execute(Input input, Tracker tracker) {
-            System.out.println("-----------Редактирование заявки-----------");
-            String id = input.ask("Введите индентификатор заявки :");
-
-            for (int index = 0; index < tracker.getAll().length; index++) {
-                if (tracker.getAll()[index].getId().equals(id) && tracker.getAll()[index].getId() != null) {
-                    String name = input.ask("Введите новое имя :");
-                    String desc = input.ask("Введите новое описание :");
-                    Item previus = new Item(name, desc);
-                    previus.setId(tracker.getAll()[index].getId());
-                    tracker.replace(id, previus);
-                    System.out.println("-----------Заявка с getID :" + tracker.getAll()[index].getId() + " изменена-----------");
-                    System.out.println("-----------Имя заявки :" + tracker.getAll()[index].getName() + " -----------");
-                    System.out.println("-----------Описание заявки :" + tracker.getAll()[index].getDescription() + "-----------");
-                } else {
-                    System.out.println("-----------Такой заявки нету.-----------");
-                }
-            }
+            Item previous = new Item();
+            previous.setId(input.ask("Введите идентификатор заявки."));
+            previous.setName(input.ask("Введите имя заявки."));
+            previous.setDescription(input.ask("Введите описание заявки."));
+            tracker.replace(previous);
         }
     }
 
