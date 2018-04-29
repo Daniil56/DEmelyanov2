@@ -1,5 +1,7 @@
 package ru.job4j.map;
 
+import ru.job4j.user.User;
+
 import java.util.HashMap;
 import java.util.List;
 

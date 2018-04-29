@@ -1,13 +1,13 @@
 package ru.job4j.map;
 
 import org.junit.Test;
+import ru.job4j.user.User;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UserConvertTest {
     @Test
