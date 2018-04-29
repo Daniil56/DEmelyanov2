@@ -10,8 +10,7 @@ import java.util.TreeSet;
 public class SortUser {
 
     public Set<User> sort(List<User> users) {
-        Set<User> sort = new TreeSet<>();
-        sort.addAll(users);
+        Set<User> sort = new TreeSet<>(users);
         return sort;
     }
 
@@ -20,7 +19,7 @@ public class SortUser {
             @Override
             public int compare(User o1, User o2) {
                 final boolean rs1 = o1.getName().length() == o2.getName().length();
-                return rs1 ? 0: o1.getName().length() > o2.getName().length() ? 1 : -1 ;
+                return rs1 ? 0 : o1.getName().length() > o2.getName().length() ? 1 : -1;
             }
         });
         return users;
@@ -30,7 +29,7 @@ public class SortUser {
         users.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return o1.getName().compareTo(o2.getName()) ;
+                return o1.getName().compareTo(o2.getName());
             }
         });
         return users;
