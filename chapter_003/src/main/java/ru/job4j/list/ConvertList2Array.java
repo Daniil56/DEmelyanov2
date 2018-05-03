@@ -11,7 +11,6 @@ public class ConvertList2Array {
         int[][] array = new int[rows][cells];
         int count = 0;
         int index = 0;
-        int k = 0;
         for (Integer in : list) {
             array[count][index++] = in;
             if (index == cells) {
