@@ -18,10 +18,10 @@ public class BankTest {
         Account accountIvan2 = new Account(5000, "9876543");
         bank.addUser(daniil);
         bank.addUser(ivan);
-        bank.addAccounToUser("1852638" , accountDaniil);
-        bank.addAccounToUser("1852638" , accountDaniil2);
         bank.addAccounToUser("1235696", accountIvan);
         bank.addAccounToUser("1235696", accountIvan2);
+        bank.addAccounToUser("1852638" , accountDaniil);
+        bank.addAccounToUser("1852638" , accountDaniil2);
         assertThat(bank.transferMoney("1852638", "123456","1852638", "654321", 500), is(true));
 
 

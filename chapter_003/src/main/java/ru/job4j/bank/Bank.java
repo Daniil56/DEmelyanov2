@@ -12,6 +12,7 @@ public class Bank {
 
     public void addUser(User user) {
         this.userListMap.putIfAbsent(user, new ArrayList<>());
+
     }
 
     public void deleteUser(User user) {
@@ -35,18 +36,25 @@ public class Bank {
 
     public boolean  getUserPassport(String passport) {
         boolean equals = false;
-        User user = new User();
-        if (user.equals(passport)) {
-            equals = true;
+        for (User user: this.userListMap.keySet()) {
+            if (user.equals(passport)) {
+                equals = true;
+        }
+
         }
         return equals;
     }
 
     public boolean getAccountRequisite(String requisite) {
         boolean equals = false;
-        Account account = new Account();
-        if (account.equals(requisite)) {
-            equals = true;
+        for (ArrayList<Account> list: this.userListMap.values()){
+            for (Account value: list ) {
+                if (value.equals(requisite)) {
+                    equals = true;
+            }
+
+        }
+
         }
         return equals;
     }
@@ -62,8 +70,8 @@ public class Bank {
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
-       return  (getUserPassport(srcPassport) && getUserPassport(destPassport) && getAccountRequisite(srcRequisite) && getAccountRequisite(destRequisite) &&
-            getAccountActual(srcPassport, srcRequisite).transfer(getAccountActual(destPassport, destRequisite), amount));
+       return  getUserPassport(srcPassport) && getUserPassport(destPassport) && getAccountRequisite(srcRequisite) && getAccountRequisite(destRequisite)
+               && getAccountActual(srcPassport, srcRequisite).transfer(getAccountActual(destPassport, destRequisite), amount);
 
 
     }

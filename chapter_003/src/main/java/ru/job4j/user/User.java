@@ -59,17 +59,15 @@ public class User implements Comparable<User> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
-                age == user.age &&
+        return
                 Objects.equals(name, user.name) &&
-                Objects.equals(city, user.city) &&
                 Objects.equals(pasport, user.pasport);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, city, age, pasport);
+        return Objects.hash( name, pasport);
     }
 
     @Override
