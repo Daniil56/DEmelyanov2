@@ -1,4 +1,4 @@
-package ru.job4j.review;
+package ru.job4j.bank;
 
 import org.junit.Test;
 import ru.job4j.user.User;
@@ -17,9 +17,12 @@ public class BankTest {
         Account accountIvan = new Account(7000, "3214566");
         bank.addUser(daniil);
         bank.addUser(ivan);
-        bank.add(daniil , accountDaniil);
-        bank.add(ivan , accountDaniil2);
-        assertThat( bank.transfer(daniil, accountDaniil,ivan, accountIvan, 500), is(2000))      ;
+        bank.addAccounToUser("1852638" , accountDaniil);
+        bank.addAccounToUser("1852638" , accountDaniil2);
+        bank.addAccounToUser("1235696", accountIvan);
+        assertThat(bank.transferMoney("1235696", "3214566","1852638", "123456", 5000), is(true));
+
+
 
 
     }

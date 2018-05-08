@@ -8,6 +8,14 @@ public class User implements Comparable<User> {
     private String name;
     private String city;
     private int age;
+    private String pasport;
+
+
+    public User(String name, String passport) {
+        this.name = name;
+        this.pasport = passport;
+    }
+
 
      public User(int id, String name, String city) {
         this.id = id;
@@ -18,6 +26,8 @@ public class User implements Comparable<User> {
     public User(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+    public User() {
     }
 
     public int getId() {
@@ -36,32 +46,43 @@ public class User implements Comparable<User> {
         return age;
     }
 
+    public String getPasport() {
+        return pasport;
+    }
+
+    public void setPasport(String pasport) {
+        this.pasport = pasport;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(name, user.name);
+        return id == user.id &&
+                age == user.age &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(city, user.city) &&
+                Objects.equals(pasport, user.pasport);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, age);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s, %d", name, age);
+        return Objects.hash(id, name, city, age, pasport);
     }
 
     @Override
     public int compareTo(User o) {
       int dif = (this.age - o.age);
         return Integer.compare(dif, 0);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", pasport='" + pasport + '\'' +
+                '}';
     }
 }
