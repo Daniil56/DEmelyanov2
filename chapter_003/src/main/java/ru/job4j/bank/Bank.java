@@ -18,9 +18,11 @@ public class Bank {
         this.userListMap.remove(user);
     }
     public void addAccounToUser(String passport, Account account) {
-       if (getUserPassport(passport)) {
-           this.userListMap.get(passport).add(account);
-       }
+           for (User user: this.userListMap.keySet()) {
+               if (user.getPasport().equals(passport))
+                   this.userListMap.get(user).add(account);
+           }
+
         }
 
     public void deleteAccountFromUser(User user, Account account) {
@@ -50,16 +52,19 @@ public class Bank {
     }
 
     private Account getAccountActual(String passport, String requisites) {
-        ArrayList<Account> list = this.userListMap.get(passport);
-        return list.get(list.indexOf(requisites));
+        Account actual = new Account();
+        for(Account account : this.userListMap.get(passport)) {
+            if (account.getRequisites().equals(requisites)) {
+                actual = account ;
+            }
+        }
+        return actual;
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
-        boolean transfer = false;
-        if (getUserPassport(srcPassport) && getUserPassport(destPassport) && getAccountRequisite(srcRequisite) && getAccountRequisite(destRequisite)) {
-            transfer = true;
-            getAccountActual(srcPassport, srcRequisite).transfer(getAccountActual(destPassport, destRequisite), amount);
-        }
-        return transfer;
+       return  (getUserPassport(srcPassport) && getUserPassport(destPassport) && getAccountRequisite(srcRequisite) && getAccountRequisite(destRequisite) &&
+            getAccountActual(srcPassport, srcRequisite).transfer(getAccountActual(destPassport, destRequisite), amount));
+
+
     }
 }

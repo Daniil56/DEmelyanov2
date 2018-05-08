@@ -19,7 +19,7 @@ public class BankTest {
         bank.addUser(ivan);
         bank.add(daniil , accountDaniil);
         bank.add(ivan , accountDaniil2);
-        assertThat( bank.transfer(daniil, accountDaniil,ivan, accountIvan, 500), is(2000))      ;
+        assertThat( bank.transfer(daniil, accountDaniil,ivan, accountDaniil2, 500), is(true))      ;
 
 
     }
