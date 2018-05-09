@@ -18,7 +18,8 @@ public class BankTest {
         bank.addUser(daniil);
         bank.addUser(ivan);
         bank.add(daniil , accountDaniil);
-        bank.add(ivan , accountDaniil2);
+        bank.add(daniil , accountDaniil2);
+        bank.add(ivan, accountIvan);
         assertThat( bank.transfer(daniil, accountDaniil,ivan, accountDaniil2, 500), is(true))      ;
 
 
