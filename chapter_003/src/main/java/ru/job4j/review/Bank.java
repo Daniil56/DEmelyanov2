@@ -11,7 +11,6 @@ import java.util.TreeMap;
 
 
 public class Bank {
-
     private TreeMap<User, ArrayList<Account>> userArrayListTreeMap = new TreeMap<>(); // Думаю лучше использовать более
                                                                                      // развернутое название переммной
 

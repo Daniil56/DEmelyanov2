@@ -56,31 +56,29 @@ public class User implements Comparable<User> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
-        return
-                Objects.equals(name, user.name) &&
-                Objects.equals(pasport, user.pasport);
+        return Objects.equals(name, user.name) && Objects.equals(pasport, user.pasport);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash( name, pasport);
+        return Objects.hash(name, pasport);
     }
 
     @Override
     public int compareTo(User o) {
-      int dif = (this.age - o.age);
-        return Integer.compare(dif, 0);
+        return this.getName().compareTo(o.getName());
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", pasport='" + pasport + '\'' +
-                '}';
+        return "User{" + "name='" + name + '\'' + ", pasport='" + pasport + '\'' + '}';
     }
 }

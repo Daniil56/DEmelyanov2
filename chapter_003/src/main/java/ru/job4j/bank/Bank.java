@@ -18,10 +18,11 @@ public class Bank {
     public void deleteUser(User user) {
         this.userListMap.remove(user);
     }
-    public void addAccounToUser(String passport, Account account) {
+    public void addAccountToUser(String passport, Account account) {
            for (User user: this.userListMap.keySet()) {
-               if (user.getPasport().equals(passport))
+               if (user.getPasport().equals(passport)) {
                    this.userListMap.get(user).add(account);
+               }
            }
 
         }
@@ -32,10 +33,11 @@ public class Bank {
 
     public List<Account> getUserAccount(String passport) {
            List<Account> list = new ArrayList<>();
-           for (ArrayList<Account> arrayList: this.userListMap.values()) {
-               for (Account account : list) {
-                   list.add(account);
-               }
+           for (User key: this.userListMap.keySet()) {
+              if (key.getPasport().equals(passport)) {
+                  list = this.userListMap.get(key);
+              }
+
            }
            return list;
     }
@@ -52,21 +54,20 @@ public class Bank {
     }
 
 
-    private Account getAccountActual( String requisites) {
+    private Account getAccountActual(String requisites) {
         Account actual = new Account();
-        for(ArrayList<Account> list : this.userListMap.values()) {
+        for (ArrayList<Account> list : this.userListMap.values()) {
             for (Account account: list) {
                 if (account.getRequisites().equals(requisites)) {
-                    actual = account ;
+                    actual = account;
             }
 
             }
         }
         return actual;
     }
-
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
-       return  getUserPassport(srcRequisite) && getUserPassport(destRequisite) &&  getAccountActual(srcRequisite).transfer(getAccountActual(destRequisite), amount);
+       return    getUserPassport(srcRequisite) && getUserPassport(destRequisite) &&  getAccountActual(srcRequisite).transfer(getAccountActual(destRequisite), amount);
 
 
     }
