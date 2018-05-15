@@ -26,4 +26,28 @@ public class BankTest {
         bank.addAccountToUser("1852638", accountDaniil2);
         assertThat(bank.transferMoney("1852638", "123456", "1852638", "654321", 500), is(true));
     }
+
+    @Test
+    public void whenMapDeleteUserThenMapVoid() {
+        Bank bank = new Bank();
+        User daniil = new User("Daniil", "1852638");
+        bank.addUser(daniil);
+        Account accountDaniil = new Account(10000, "123456");
+        bank.addAccountToUser("1852638", accountDaniil);
+        bank.deleteUser(daniil);
+        assertThat(bank.getUserAccount("1852638").size(), is(0));
+    }
+
+    @Test
+    public void whenMapDeleteAccountThenListAccountVoid() {
+        Bank bank = new Bank();
+        User daniil = new User("Daniil", "1852638");
+        bank.addUser(daniil);
+        Account accountDaniil = new Account(10000, "123456");
+        bank.addAccountToUser("1852638", accountDaniil);
+        bank.deleteAccountFromUser(daniil, accountDaniil);
+        assertThat(bank.getUserAccount("1852638").size(), is(0));
+    }
+
+
 }
