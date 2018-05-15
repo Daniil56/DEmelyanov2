@@ -17,7 +17,7 @@ public class ChangeMoney {
         int[] oddMoney = new int[13];
         int difference = value - price;
         int[] size = Change.changes(value, price);
-        int sum =0;
+        int sum = 0;
 
         for (int index = 0; index < oddMoney.length; index++) {
             if (difference != 0 && difference >= 1000) {

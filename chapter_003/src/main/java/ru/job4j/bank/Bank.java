@@ -42,10 +42,10 @@ public class Bank {
            return list;
     }
 
-    public boolean  getUserPassport(String passport) {
+    public boolean getUserRequisites(String requisites) {
         boolean equals = false;
         for (User user: this.userListMap.keySet()) {
-            if (this.userListMap.get(user).contains(getAccountActual(passport))) {
+            if (this.userListMap.get(user).contains(getAccountActual(requisites))) {
                 equals = true;
         }
 
@@ -53,6 +53,16 @@ public class Bank {
         return equals;
     }
 
+    public boolean getUserPassport(String passport) {
+        boolean equals = false;
+        for (User user: this.userListMap.keySet()) {
+            if (user.getPasport().equals(passport)) {
+                equals = true;
+            }
+
+        }
+        return equals;
+    }
 
     private Account getAccountActual(String requisites) {
         Account actual = new Account();
@@ -67,8 +77,6 @@ public class Bank {
         return actual;
     }
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
-       return    getUserPassport(srcRequisite) && getUserPassport(destRequisite) &&  getAccountActual(srcRequisite).transfer(getAccountActual(destRequisite), amount);
-
-
+       return   getUserPassport(destPassport) && getUserPassport(srcPassport) && getUserRequisites(srcRequisite) && getUserRequisites(destRequisite) &&  getAccountActual(srcRequisite).transfer(getAccountActual(destRequisite), amount);
     }
 }
