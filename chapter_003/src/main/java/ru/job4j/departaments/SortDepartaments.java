@@ -1,69 +1,42 @@
 package ru.job4j.departaments;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Класс сортировки депортаментов.
  */
 public class SortDepartaments {
-    private final String[] values;
 
     /**
-     * Конструктр класса принимающий массив строк.
-     * В конструкторе используется объект StringBullder для обновления значений строк.
-     * Также применяется коллекция Set, не позволяющия хранить дублированные значения.
-     * @param values исходный массив строк, передаваемый методу.
+     * Метод сортировки депортаментов.
+     * В методе используется коллекция TreeSet, позволяющаю сортировать множество.
+     * @param values Исходный массив строк департаментов.
+     * @return Отсортированные депортаменты.
      */
-    public SortDepartaments(String[] values) {
-        Set<String> temp = new HashSet<>(Arrays.asList(values));
+    public Set<String> sortDepartments(String[] values) {
+        TreeSet<String> temp = new TreeSet<>();
         for (String value: values) {
             StringBuilder builder = new StringBuilder();
-            String[] separate = value.split("\\\\");
-            builder.append(separate[0]);
-            temp.add(builder.toString());
-            for (int index = 1; index < separate.length - 1; index++) {
-                builder.append("\\").append(separate[index]);
+            for (String s : value.split("\\\\")) {
+                builder.append(s);
                 temp.add(builder.toString());
+                builder.append("\\");
             }
         }
-        this.values = temp.toArray(new String[temp.size()]);
-    }
-
-    /**
-     * Метод сортировки департаментов.
-     * Для сортировки используем метод sort из класса Arrays
-     * @return Отсортированный массив.
-     */
-    public String[] sort() {
-        Arrays.sort(this.values);
-        return this.values;
+        return temp;
     }
 
     /**
      * Метод реверсивной сортировки.
-     * В методе переопределен метод компоратора compare
+     * В методе используется метод из класса Comparator reverseOrder
      * @return Отсортированный реверсивно, массив.
      */
-    public String[] reverse() {
-        Arrays.sort(this.values, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int minLength = Math.min(o1.length(), o2.length());
-                int result = o1.length() - o2.length();
-                for (int index = 0; index < minLength; index++) {
-                    char o1Char = o1.charAt(index);
-                    char o2Char = o2.charAt(index);
-                    if (o2Char - o1Char != 0) {
-                        result = o2Char - o1Char;
-                        break;
-                    }
-                }
-                return result;
+    public TreeSet<String> reverse(String[] departments) {
+        TreeSet<String>  sortDepartments = new TreeSet<>(Comparator.reverseOrder());
+          sortDepartments.addAll(sortDepartments(departments));
+                return sortDepartments;
             }
-        });
-        return this.values;
-    }
+
+
+
 }
