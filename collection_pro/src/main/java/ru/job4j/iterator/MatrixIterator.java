@@ -9,7 +9,7 @@ public class MatrixIterator implements Iterator  {
     private int out = 0;
     private int in = 0;
     private int cells = 0;
-
+    private int index = 0;
 
     public MatrixIterator(int[][] values) {
         this.values = values;
@@ -17,30 +17,25 @@ public class MatrixIterator implements Iterator  {
 
     @Override
     public boolean hasNext() {
-
-        return values.length < out;
+        if (index == values.length - 1) {
+            index = 0;
+        }
+        return values[index++].length - 1  > index;
     }
 
     @Override
     public Object next() {
-        int result = -1;
-        int index = 0;
-        for (int[] array : values) {
-            cells = values.length % array.length == 1 ? array.length - 1 : array.length + 1;
+try {
+    cells = values.length % values[out].length == 1 ? values[out].length - 1 : values[out].length;
+} catch (NumberFormatException exception) {
+    System.out.println("No such element");
+}
+        if (in == cells) {
+            in = 0;
+            out++;
+
         }
-        result = values[out][in++];
-            if (in == cells) {
-                in = 0;
-                out++;
-                index++;
-        } else {
-                if (values[index + 1].length > values[index].length) {
-                    result = values[out++][in];
-                    while (values[index + 1].length < in) {
-                        in++;
-                    }
-                }
-            }
-        return result;
+        return values[out][in++];
+
     }
     }
