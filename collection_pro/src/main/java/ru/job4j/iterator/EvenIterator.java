@@ -1,10 +1,10 @@
 package ru.job4j.iterator;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class EvenIterator implements Iterator {
     private int[] array;
-    private int index = 0;
     private int count = 0;
 
     public EvenIterator(int[] array) {
@@ -14,12 +14,12 @@ public class EvenIterator implements Iterator {
     @Override
     public boolean hasNext() {
         boolean result = false;
-        while (count < array.length - 1) {
-            count++;
+        while (count < array.length) {
             if (this.array[this.count] % 2 == 0) {
                 result = true;
                 break;
             }
+            count++;
         }
         return result;
     }
@@ -27,12 +27,9 @@ public class EvenIterator implements Iterator {
     @Override
     public Object next() {
         if (!hasNext()) {
-            try {
-                throw new NoSuchFieldException("np such even element");
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
+                throw new NoSuchElementException("no such even element");
         }
+
         return this.array[this.count++];
     }
 }
