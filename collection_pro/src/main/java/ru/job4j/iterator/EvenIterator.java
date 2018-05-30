@@ -13,21 +13,26 @@ public class EvenIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        while (count < array.length - 1 && array[count] % 2 != 0) {
+        boolean result = false;
+        while (count < array.length - 1) {
             count++;
+            if (this.array[this.count] % 2 == 0) {
+                result = true;
+                break;
+            }
         }
-        return array[count++] % 2 == 0;
+        return result;
     }
 
     @Override
     public Object next() {
-        int result = -1;
-            if (array[index] % 2 == 0) {
-                result = array[index];
+        if (!hasNext()) {
+            try {
+                throw new NoSuchFieldException("np such even element");
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
             }
-                while (index < array.length - 1 && array[index++] % 2 != 0) {
-                    result = array[index];
-                }
-        return result;
+        }
+        return this.array[this.count++];
     }
 }
