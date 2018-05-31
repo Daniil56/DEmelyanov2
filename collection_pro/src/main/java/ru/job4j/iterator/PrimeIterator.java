@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 public class PrimeIterator implements Iterator {
     private int[] array;
     private int count = 0;
-    private int index = 0;
 
     public PrimeIterator(int[] array) {
         this.array = array;
