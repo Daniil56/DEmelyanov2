@@ -37,7 +37,7 @@ public class SimpleArrayTest {
         simple.delete(2);
         assertThat(simple.iterator().next(), is("A"));
         assertThat(simple.iterator().next(), is("B"));
-        assertThat(simple.iterator().hasNext(), is(false));
+        assertThat(simple.ifDelete(), is(false));
     }
 
 }

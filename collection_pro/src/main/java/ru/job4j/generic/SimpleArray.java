@@ -33,13 +33,17 @@ public class SimpleArray<T> implements Iterable<T> {
         this.objects[position] = null;
     }
 
+    boolean ifDelete() {
+        return objects[count] != null;
+    }
+
 
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             @Override
             public boolean hasNext() {
-                return objects[count] != null;
+                return count < objects.length;
             }
 
             @Override
