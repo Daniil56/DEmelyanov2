@@ -37,6 +37,21 @@ public class SimpleArray<T> implements Iterable<T> {
         return objects[count] != null;
     }
 
+    int size() {
+        return objects.length;
+    }
+/*
+    int indexOf (T model) {
+        int result = -1;
+        for (int i = 0; i < objects.length; i++) {
+            if (model.equals(objects[i])) {
+                result = i;
+            }
+        }
+        return result;
+    }
+
+ */
 
     @Override
     public Iterator<T> iterator() {
