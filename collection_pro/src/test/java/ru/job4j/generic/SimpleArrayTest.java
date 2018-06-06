@@ -2,6 +2,9 @@ package ru.job4j.generic;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.core.Is.is;
 
 public class SimpleArrayTest {
@@ -38,6 +41,46 @@ public class SimpleArrayTest {
         assertThat(simple.iterator().next(), is("A"));
         assertThat(simple.iterator().next(), is("B"));
         assertThat(simple.ifDelete(), is(false));
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void hasNextSequentialInvocation() {
+        SimpleArray<Integer> simple = new SimpleArray<>(3);
+        simple.add(1);
+        simple.add(2);
+        simple.add(3);
+        assertThat(simple.iterator().hasNext(), is(true));
+        assertThat(simple.iterator().next(), is(1));
+        assertThat(simple.iterator().hasNext(), is(true));
+        assertThat(simple.iterator().next(), is(2));
+        assertThat(simple.iterator().hasNext(), is(true));
+        assertThat(simple.iterator().next(), is(3));
+        assertThat(simple.iterator().hasNext(), is(false));
+        simple.iterator().next();
+    }
+
+    @Test
+    public void testThatNextMethodDosentNotDependsOnPriorityHasNextInvocation() {
+        SimpleArray<Integer> simple = new SimpleArray<>(3);
+        simple.add(1);
+        simple.add(2);
+        simple.add(3);
+        assertThat(simple.iterator().next(), is(1));
+        assertThat(simple.iterator().next(), is(2));
+        assertThat(simple.iterator().next(), is(3));
+    }
+
+    @Test
+    public void sequentialHasNextInvocationDoestAffectRetrievalOrder() {
+        SimpleArray<Integer> simple = new SimpleArray<>(3);
+        simple.add(1);
+        simple.add(2);
+        simple.add(3);
+        assertThat(simple.iterator().hasNext(), is(true));
+        assertThat(simple.iterator().hasNext(), is(true));
+        assertThat(simple.iterator().next(), is(1));
+        assertThat(simple.iterator().next(), is(2));
+        assertThat(simple.iterator().next(), is(3));
     }
 
 }
