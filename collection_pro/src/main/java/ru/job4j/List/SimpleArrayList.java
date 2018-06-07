@@ -15,12 +15,9 @@ public class SimpleArrayList<e> {
 
     public Integer delete() {
 
-        Node<e> newLink = new Node<>(get(1));
-        Integer temp = get(0);
+        Integer temp = first.date;
 
-        newLink.next = this.first;
-
-        this.first = newLink;
+        this.first = first.next;
 
         this.size--;
 
