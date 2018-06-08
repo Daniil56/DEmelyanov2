@@ -2,7 +2,6 @@ package ru.job4j.list;
 
 
 public class SimpleArrayList<e> {
-
     private int size;
     private Node<e> first;
 
@@ -14,13 +13,9 @@ public class SimpleArrayList<e> {
     }
 
     public Integer delete() {
-
         Integer temp = first.date;
-
         this.first = first.next;
-
         this.size--;
-
         return temp;
     }
 
@@ -37,10 +32,8 @@ public class SimpleArrayList<e> {
     }
 
     private static  class Node<e> {
-
         Integer date;
         Node<e> next;
-
         Node(Integer date) {
             this.date = date;
         }

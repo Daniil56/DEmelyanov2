@@ -8,7 +8,7 @@ public class Dynamic<E> implements Iterable<E> {
     private int index = 0;
     private int count = 0;
     protected transient int modCount = 0;
-    private static final int INIT_SIZE = 10;
+    private final static int INIT_SIZE = 10;
     private Object[] container = new Object[INIT_SIZE];
 
     public void add(E value) {
