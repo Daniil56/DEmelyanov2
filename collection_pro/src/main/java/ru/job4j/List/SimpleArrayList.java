@@ -12,11 +12,11 @@ public class SimpleArrayList<e> {
         this.size++;
     }
 
-    public Integer delete() {
+    public e delete() {
         Integer temp = first.date;
         this.first = first.next;
         this.size--;
-        return temp;
+        return (e) temp;
     }
 
     public Integer get(int index) {
