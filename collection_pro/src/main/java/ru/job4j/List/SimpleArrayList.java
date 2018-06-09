@@ -31,7 +31,7 @@ public class SimpleArrayList<e> {
         return this.size;
     }
 
-    private static  class Node<e> {
+    private static class Node<e> {
         Integer date;
         Node<e> next;
         Node(Integer date) {
