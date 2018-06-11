@@ -1,30 +1,30 @@
 package ru.job4j.list;
 
 
-public class SimpleArrayList<e> {
+public class SimpleArrayList<E> {
     private int size;
-    private Node<e> first;
+    private Node<E> first;
 
     public void add(Integer date) {
-        Node<e> newLink = new Node<>(date);
+        Node<E> newLink = new Node<>(date);
         newLink.next = this.first;
         this.first = newLink;
         this.size++;
     }
 
-    public e delete() {
+    public E delete() {
         Integer temp = first.date;
         this.first = first.next;
         this.size--;
-        return (e) temp;
+        return (E) temp;
     }
 
-    public Integer get(int index) {
-        Node<e> result = this.first;
+    public E get(int index) {
+        Node<E> result = this.first;
         for (int i = 0; i < index; i++) {
             result = result.next;
         }
-        return result.date;
+        return (E) result.date;
     }
 
     public int getSize() {
