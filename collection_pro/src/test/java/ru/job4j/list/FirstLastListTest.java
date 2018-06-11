@@ -38,8 +38,18 @@ public class FirstLastListTest {
         list.add(4);
         assertThat(list.iterator().next(), is(4));
         assertThat(list.iterator().hasNext(), is(false));
+    }
 
+    @Test
+    public void whenDeleteFirst() {
+        list.deleteFirst();
+        assertThat(list.get(0), is(2));
 
     }
 
+    @Test
+    public void whenDeleteLast() {
+        list.deleteLast();
+        assertThat(list.get(1), is(2));
+    }
 }

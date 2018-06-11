@@ -4,9 +4,9 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class FirstLastList<e> implements Iterable<e> {
-    private Node<e> first;
-    private Node<e> last;
+public class FirstLastList<E> implements Iterable<E> {
+    private Node<E> first;
+    private Node<E> last;
     private int size = 0;
     protected transient int modCount = 0;
     int  expectedModCount = 0;
@@ -16,7 +16,7 @@ public class FirstLastList<e> implements Iterable<e> {
     }
 
     public void add(Integer value) {
-        Node<e> newLink = new Node<>(value);
+        Node<E> newLink = new Node<>(value);
         if (isEmpty()) {
             last = newLink;
             newLink.next = this.first;
@@ -31,13 +31,33 @@ public class FirstLastList<e> implements Iterable<e> {
     }
 
 
+
     public Integer get(int index) {
-        Node<e> result = this.first;
+        Node<E> result = this.first;
         for (int i = 0; i < index; i++) {
            result = result.next;
         }
         return result.date;
     }
+
+    public E deleteFirst() {
+        Integer temp = first.date;
+        this.first = first.next;
+        this.size--;
+        return (E) temp;
+    }
+
+    public E deleteLast() {
+        Integer temp = last.date;
+        this.size--;
+        for (int index  = 0; index < size - 1; index++) {
+            this.last = first.next;
+        }
+        last.next = null;
+
+        return (E) temp;
+    }
+
 
     public int getSize() {
         return size;
@@ -52,24 +72,26 @@ public class FirstLastList<e> implements Iterable<e> {
        }
     }
 
+
+
     final void checkModcount() {
-         if (modCount != expectedModCount) {
+         if (modCount != size) {
             throw new ConcurrentModificationException("this collection has undergone a change");
         }
      }
 
 
     @Override
-    public Iterator<e> iterator() {
+    public Iterator<E> iterator() {
         expectedModCount = modCount;
-        return new Iterator<e>() {
+        return new Iterator<E>() {
             @Override
             public boolean hasNext() {
                 return first != null;
             }
 
             @Override
-            public e next() {
+            public E next() {
                 checkModcount();
                 if (!hasNext()) {
                     throw new NoSuchElementException("no such");
@@ -77,7 +99,7 @@ public class FirstLastList<e> implements Iterable<e> {
                Integer result = first.date;
                 first = first.next;
 
-                return (e) result;
+                return (E) result;
             }
         };
     }
