@@ -63,6 +63,5 @@ public class FirstLastListTest {
         assertThat(list.get(1), is(3));
         assertThat(list.get(2), is(2));
         assertThat(list.get(3), is(1));
-
     }
 }
