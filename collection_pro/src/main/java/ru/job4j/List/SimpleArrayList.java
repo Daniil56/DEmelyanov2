@@ -5,7 +5,7 @@ public class SimpleArrayList<E> {
     private int size;
     private Node<E> first;
 
-    public void add(Integer date) {
+    public void add(E date) {
         Node<E> newLink = new Node<>(date);
         newLink.next = this.first;
         this.first = newLink;
@@ -13,10 +13,10 @@ public class SimpleArrayList<E> {
     }
 
     public E delete() {
-        Integer temp = first.date;
+        E temp = first.date;
         this.first = first.next;
         this.size--;
-        return (E) temp;
+        return temp;
     }
 
     public E get(int index) {
@@ -24,17 +24,17 @@ public class SimpleArrayList<E> {
         for (int i = 0; i < index; i++) {
             result = result.next;
         }
-        return (E) result.date;
+        return result.date;
     }
 
     public int getSize() {
         return this.size;
     }
 
-    private static class Node<e> {
-        Integer date;
-        Node<e> next;
-        Node(Integer date) {
+    private static class Node<E> {
+        E date;
+        Node<E> next;
+        Node(E date) {
             this.date = date;
         }
     }
