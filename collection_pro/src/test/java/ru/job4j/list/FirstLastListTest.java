@@ -52,4 +52,17 @@ public class FirstLastListTest {
         list.deleteLast();
         assertThat(list.get(1), is(2));
     }
+
+    @Test
+    public void whenDInsertFist() {
+        list.insetFirst(1);
+        list.insetFirst(2);
+        list.insetFirst(3);
+        list.insetFirst(4);
+        assertThat(list.get(0), is(4));
+        assertThat(list.get(1), is(3));
+        assertThat(list.get(2), is(2));
+        assertThat(list.get(3), is(1));
+
+    }
 }

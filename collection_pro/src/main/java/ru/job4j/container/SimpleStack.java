@@ -6,11 +6,11 @@ public class SimpleStack<T> {
 
 
     public T poll() {
-         return list.deleteFirst();
+         return list.deleteLast();
     }
 
     public void push(T value) {
-        list.insetFirst(value);
+        list.add(value);
 
     }
 

@@ -23,6 +23,7 @@ public class FirstLastList<E> implements Iterable<E> {
             this.first = newLink;
         } else {
             last.next = newLink;
+            newLink.previous = last;
             last = newLink;
         }
         this.size++;
@@ -50,18 +51,27 @@ public class FirstLastList<E> implements Iterable<E> {
 
     public E deleteFirst() {
         E temp = first.date;
-        this.first = first.next;
+        if (size > 1) {
+            this.first.next.previous = null;
+            this.first = first.next;
+        } else {
+            this.first = null;
+            this.last = null;
+        }
         this.size--;
         return  temp;
     }
 
     public E deleteLast() {
         E temp = last.date;
-        this.size--;
-        if (iterator().hasNext()) {
-            this.last = first.next;
+        if (size > 1) {
+            this.last.previous.next = null;
+            this.last = this.last.previous;
+        } else {
+            this.first = null;
+            this.last = null;
         }
-
+        this.size--;
         return temp;
     }
 
@@ -73,6 +83,7 @@ public class FirstLastList<E> implements Iterable<E> {
     private static class Node<E> {
         E date;
         Node<E> next;
+        Node<E> previous;
 
         Node(E date) {
             this.date = date;
