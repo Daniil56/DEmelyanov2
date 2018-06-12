@@ -15,7 +15,7 @@ public class FirstLastList<E> implements Iterable<E> {
         return first == null;
     }
 
-    public void add(Integer value) {
+    public void add(E value) {
         Node<E> newLink = new Node<>(value);
         if (isEmpty()) {
             last = newLink;
@@ -29,10 +29,16 @@ public class FirstLastList<E> implements Iterable<E> {
         modCount++;
 
     }
+    public void insetFirst(E value) {
+        Node<E> newLink = new Node<>(value);
+        newLink.next = first;
+        first = newLink;
+        size++;
+    }
 
 
 
-    public Integer get(int index) {
+    public E get(int index) {
         Node<E> result = this.first;
         for (int i = 0; i < index; i++) {
            result = result.next;
@@ -40,22 +46,23 @@ public class FirstLastList<E> implements Iterable<E> {
         return result.date;
     }
 
+
+
     public E deleteFirst() {
-        Integer temp = first.date;
+        E temp = first.date;
         this.first = first.next;
         this.size--;
-        return (E) temp;
+        return  temp;
     }
 
     public E deleteLast() {
-        Integer temp = last.date;
+        E temp = last.date;
         this.size--;
-        for (int index  = 0; index < size - 1; index++) {
+        if (iterator().hasNext()) {
             this.last = first.next;
         }
-        last.next = null;
 
-        return (E) temp;
+        return temp;
     }
 
 
@@ -63,11 +70,11 @@ public class FirstLastList<E> implements Iterable<E> {
         return size;
     }
 
-    private static class Node<e> {
-        Integer date;
-        Node<e> next;
+    private static class Node<E> {
+        E date;
+        Node<E> next;
 
-        Node(Integer date) {
+        Node(E date) {
             this.date = date;
        }
     }
@@ -96,10 +103,10 @@ public class FirstLastList<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException("no such");
                 }
-               Integer result = first.date;
+               E result = first.date;
                 first = first.next;
 
-                return (E) result;
+                return  result;
             }
         };
     }
