@@ -19,7 +19,7 @@ public class Cycle {
         while (hare != null && hare.next != null) {
             turtle = turtle.next;
             hare = hare.next.next;
-            if (turtle == hare) {
+            if (turtle.equals(hare)) {
                 return true;
             }
         }
