@@ -33,6 +33,10 @@ public class Dynamic<E> implements Iterable<E> {
         container = newArray;
     }
 
+    public boolean isEmpty() {
+        return size() < 1;
+    }
+
     int expectedModCount = modCount;
 
 
