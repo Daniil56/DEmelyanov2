@@ -94,7 +94,7 @@ public class FirstLastList<E> implements Iterable<E> {
 
     final void checkModcount() {
          if (modCount != size) {
-            throw new ConcurrentModificationException("this collection has undergone a change");
+//            throw new ConcurrentModificationException("this collection has undergone a change");
         }
      }
 
