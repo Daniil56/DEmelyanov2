@@ -23,25 +23,25 @@ public class SimpleSet<E> implements Iterable<E> {
     }
 
     public boolean checkOfDuplicates(E t) {
-        boolean result = false;
-        for (E value : list) {
-            if (t.equals(value)) {
-                result = true;
+        boolean result = true;
+        for (E value : this.list) {
+            if (value.equals(t)) {
+                result = false;
             }
         }
         return result;
     }
 
-    public void add(E e) {
-        if (isempty()) {
-            count++;
-            list.add(e);
-        } else {
-        if (!checkOfDuplicates(e)) {
-            count++;
-            list.add(e);
+    public boolean add(E e) {
+        //boolean result = true;
+        for (E check: this.list) {
+            if (check.equals(e)) {
+                return false;
+            }
         }
-        }
+        this.list.add(e);
+        count++;
+        return true;
     }
 
     @Override
