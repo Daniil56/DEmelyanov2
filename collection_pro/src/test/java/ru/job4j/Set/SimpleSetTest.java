@@ -21,7 +21,8 @@ public class SimpleSetTest {
         set.add("two");
         set.add("two");
         set.add("third");
-       // set.add("two");
+        set.add("two");
+        set.add("one");
 
     }
 
@@ -39,8 +40,6 @@ public class SimpleSetTest {
         assertThat(set.iterator().next(), is("two"));
         assertThat(set.iterator().hasNext(), is(true));
         assertThat(set.iterator().next(), is("third"));
-//        assertThat(set.iterator().hasNext(), is(true));
-  //      assertThat(set.iterator().next(), is(4));
         assertThat(set.iterator().hasNext(), is(false));
     }
 
@@ -67,7 +66,4 @@ public class SimpleSetTest {
         assertThat(set.iterator().next(), is("third"));
         set.iterator().next();
     }
-
-
-
 }
