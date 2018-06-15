@@ -11,32 +11,20 @@ public class SimpleLinkedSet<E> implements Iterable<E> {
     public int size() {
         return list.getSize();
     }
-    public boolean checkOfDuplicates(E t) {
-        boolean result = false;
-        Iterator<E> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().equals(t)) {
-                result = true;
-            }
-        }
-        return result;
-    }
-
-    public boolean isEmpty() {
-       return list.isEmpty();
-    }
 
     public boolean add(E e) {
-        for (E check: this.list) {
-            if (check.equals(e)) {
-                return false;
+        boolean result = true;
+        for (int index = 0; index < this.list.getSize(); index++) {
+            if (e == null ? this.list.get(index) == null : e.equals(this.list.get(index))) {
+                result = false;
+                break;
             }
         }
-        this.list.add(e);
+        if (result) {
+            this.list.add(e);
+        }
         return true;
 }
-
-
 
     @Override
     public Iterator<E> iterator() {

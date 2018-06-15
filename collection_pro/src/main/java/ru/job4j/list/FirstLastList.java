@@ -32,12 +32,15 @@ public class FirstLastList<E> implements Iterable<E> {
     }
     public void insetFirst(E value) {
         Node<E> newLink = new Node<>(value);
-        newLink.next = first;
-        first = newLink;
+        if (isEmpty()) {
+            this.last = newLink;
+        } else {
+       first.previous = newLink;
+       newLink.next = first;
+       first = newLink;
+        }
         size++;
     }
-
-
 
     public E get(int index) {
         Node<E> result = this.first;
@@ -46,8 +49,6 @@ public class FirstLastList<E> implements Iterable<E> {
         }
         return result.date;
     }
-
-
 
     public E deleteFirst() {
         E temp = first.date;
@@ -75,7 +76,6 @@ public class FirstLastList<E> implements Iterable<E> {
         return temp;
     }
 
-
     public int getSize() {
         return size;
     }
@@ -89,8 +89,6 @@ public class FirstLastList<E> implements Iterable<E> {
             this.date = date;
        }
     }
-
-
 
     final void checkModcount() {
          if (modCount != size) {
