@@ -21,14 +21,14 @@ public class HashTableTest {
         hashTable.add("seven");
         hashTable.add("eight");
         hashTable.add("nine");
-       // hashTable.add("ten");
-       // hashTable.add("eleevenn");
+        hashTable.add("ten");
+        hashTable.add("eleevenn");
 
     }
 
     @Test
     public void whentHashTableSize() {
-        assertThat(hashTable.size(), is(9));
+        assertThat(hashTable.size(), is(11));
     }
 
     @Test

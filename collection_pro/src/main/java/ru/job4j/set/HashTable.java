@@ -14,7 +14,7 @@ public class HashTable<E> {
 
     public HashTable(int size) {
         this.arraySize = size;
-        this.hashArray = new Object[arraySize];
+        this.hashArray = new Object[size];
         this.nonItem = -1;
     }
 
@@ -27,24 +27,28 @@ public class HashTable<E> {
 
     public void reSize() {
         int temp = arraySize;
-        arraySize = arraySize * 2;
-        Object[] newHashArray = new Object[arraySize];
+        Object[] newHashArray = new Object[hashArray.length * 2];
+        int hasval = 0;
         int hasval2 = 0;
-        int hasval = hashFunc(hashArray[index].hashCode());
 
         for (int index = 0; index != count; index++) {
-
-            newHashArray[hasval++] = hashArray[index];
+           hasval = hashFunc(hashArray[index].hashCode());
+           hasval2 = hashArray[index].hashCode() % (hashArray.length * 2);
+            newHashArray[hasval2] = hashArray[hasval];
 
         }
+
         hashArray = newHashArray;
+        //arraySize = hashArray.length;
+
 
     }
 
 
     public void add(E e) {
-        if (count >= hashArray.length - 1) {
+        if (count == hashArray.length) {
             reSize();
+            //hashArray = new Object[size()*2];
         }
         int key =  e.hashCode();
         int hashVal = hashFunc(key);
