@@ -23,7 +23,6 @@ public class HashTableTest {
         hashTable.add("nine");
         hashTable.add("ten");
         hashTable.add("eleevenn");
-
     }
 
     @Test
@@ -43,5 +42,4 @@ public class HashTableTest {
         hashTable.remove("one");
         assertThat(hashTable.conrains("one"), is(false));
     }
-
 }

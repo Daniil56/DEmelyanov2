@@ -1,16 +1,11 @@
 package ru.job4j.set;
 
-import java.util.Arrays;
-import java.util.Objects;
-
 public class HashTable<E> {
 
     private Object[] hashArray;
     private int arraySize;
     private int nonItem;
     private int count;
-    int index = 0;
-
 
     public HashTable(int size) {
         this.arraySize = size;
@@ -18,7 +13,7 @@ public class HashTable<E> {
         this.nonItem = -1;
     }
 
-    public int hashFunc(int key) {
+    private int hashFunc(int key) {
         return key % arraySize;
     }
     public int size() {
@@ -26,34 +21,23 @@ public class HashTable<E> {
     }
 
     public void reSize() {
-        int temp = arraySize;
         Object[] newHashArray = new Object[hashArray.length * 2];
         int hasval = 0;
         int hasval2 = 0;
-
         for (int index = 0; index != count; index++) {
            hasval = hashFunc(hashArray[index].hashCode());
            hasval2 = hashArray[index].hashCode() % (hashArray.length * 2);
             newHashArray[hasval2] = hashArray[hasval];
-
         }
-
         hashArray = newHashArray;
-        //arraySize = hashArray.length;
-
-
     }
-
 
     public void add(E e) {
         if (count == hashArray.length) {
             reSize();
-            //hashArray = new Object[size()*2];
         }
         int key =  e.hashCode();
         int hashVal = hashFunc(key);
-
-
         while (hashArray[hashVal] != null) {
             ++hashVal;
             hashVal %= arraySize;
@@ -70,24 +54,18 @@ public class HashTable<E> {
     public boolean remove(E e) {
        boolean result = false;
        int hashval = hashFunc(e.hashCode());
-
            if (isContains(e)) {
                hashArray[hashval] = nonItem;
                result = true;
            }
-
        return result;
     }
 
     public boolean conrains(E e) {
         boolean result = false;
-
         if (isContains(e)) {
             result = true;
         }
-
         return result;
-
     }
-
 }
