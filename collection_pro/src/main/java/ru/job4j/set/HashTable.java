@@ -16,7 +16,7 @@ public class HashTable<E> {
     private int hashFunc(int key) {
         return key % arraySize;
     }
-    public int size() {
+    public int getSize() {
         return count;
     }
 

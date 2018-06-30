@@ -27,7 +27,7 @@ public class HashTableTest {
 
     @Test
     public void whentHashTableSize() {
-        assertThat(hashTable.size(), is(11));
+        assertThat(hashTable.getSize(), is(11));
     }
 
     @Test
