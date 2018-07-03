@@ -4,9 +4,7 @@ import java.util.*;
 
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     private Node root;
-    int index = 0;
-    int count = 0;
-
+    private int modCount = 0;
 
     public Tree(E data) {
         this.root = new Node(data);
@@ -32,6 +30,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             }
         }
         rst.add(newNode);
+        modCount++;
         return result;
     }
 
@@ -54,34 +53,40 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return result;
     }
 
-    private E levelOrder(Node<E> localRoot) {
-     Queue<E> data = new LinkedList<>();
-    Node<E> next = localRoot.leaves().get(count);
-            while (true) {
-                data.offer(localRoot.leaves().get(count++).getValue());
-                break;
-            }
-
-
-     return data.poll();
-    }
 
     @Override
     public Iterator<E> iterator() {
-        Node<E> next = root;
-        return new Iterator<E>() {
+        class TreeIterator implements Iterator<E> {
+            private int expectedModCount = modCount;
+            private Node<E> value;
+            private Queue<Node<E>> data;
+
+            private TreeIterator() {
+                data = new LinkedList<>();
+                data.offer(root);
+            }
             @Override
             public boolean hasNext() {
-                return next.leaves().get(index) != null;
-            }
+                return !data.isEmpty();
+        }
 
-            @Override
+        @Override
             public E next() {
-                return levelOrder(next);
-            }
-        };
+                if (modCount != expectedModCount) {
+                    throw  new ConcurrentModificationException("modification alert");
+                }
+                if (!hasNext()) {
+                    throw new NoSuchElementException("no such");
+                }
+                value = data.poll();
+            assert value != null;
+            for (Node<E> child : value.leaves()) {
+                    data.offer(child);
+                }
+                return value.getValue();
+        }
     }
-
-
+    return new TreeIterator();
+}
 
 }
