@@ -22,4 +22,29 @@ public class SimpleTreeTest {
         tree.add(1, 2);
         assertThat(tree.findBy(6).isPresent(), is(false));
     }
+
+    @Test
+    public void whenIterator() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(5, 6);
+
+        assertThat(tree.iterator().hasNext(), is(true));
+        assertThat(tree.iterator().next(), is(2));
+        assertThat(tree.iterator().next(), is(3));
+        assertThat(tree.iterator().next(), is(4));
+      //  assertThat(tree.iterator().hasNext(), is(true));
+
+        //assertThat(tree.iterator().next(), is(5));
+
+
+
+
+
+
+
+    }
 }

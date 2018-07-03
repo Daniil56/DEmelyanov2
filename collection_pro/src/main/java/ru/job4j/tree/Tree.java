@@ -1,12 +1,11 @@
 package ru.job4j.tree;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
 
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     private Node root;
+    int index = 0;
+    int count = 0;
 
 
     public Tree(E data) {
@@ -19,23 +18,22 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         boolean result = false;
         Node<E> newNode = new Node<>(child);
         Node<E> rst = new Node<>(parent);
-            Queue<Node<E>> data = new LinkedList<>();
-            data.offer(this.root);
-            while (!data.isEmpty()) {
-                Node<E> el = data.poll();
-                if (el != null && el.eqValue(parent)) {
-                    rst =  el;
-                    result = true;
-                    break;
-                }
-                for (Node<E> childs : el.leaves()) {
-                    data.offer(childs);
-                }
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> el = data.poll();
+            if (el != null && el.eqValue(parent)) {
+                rst = el;
+                result = true;
+                break;
             }
-            rst.add(newNode);
+            for (Node<E> childs : el.leaves()) {
+                data.offer(childs);
+            }
+        }
+        rst.add(newNode);
         return result;
-      }
-
+    }
 
 
     @Override
@@ -53,25 +51,37 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 data.offer(child);
             }
         }
-        return  result;
+        return result;
     }
 
+    private E levelOrder(Node<E> localRoot) {
+     Queue<E> data = new LinkedList<>();
+    Node<E> next = localRoot.leaves().get(count);
+            while (true) {
+                data.offer(localRoot.leaves().get(count++).getValue());
+                break;
+            }
 
 
-
+     return data.poll();
+    }
 
     @Override
     public Iterator<E> iterator() {
+        Node<E> next = root;
         return new Iterator<E>() {
             @Override
             public boolean hasNext() {
-                return false;
+                return next.leaves().get(index) != null;
             }
 
             @Override
             public E next() {
-                return null;
+                return levelOrder(next);
             }
         };
     }
+
+
+
 }
