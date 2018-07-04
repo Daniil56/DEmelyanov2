@@ -53,6 +53,10 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return result;
     }
 
+    public boolean isBinary() {
+        return root.isBinary();
+    }
+
 
     @Override
     public Iterator<E> iterator() {

@@ -21,6 +21,8 @@ public class SimpleTreeTest {
         tree.add(1, 4);
         tree.add(4, 5);
         tree.add(5, 6);
+
+
     }
 
     @Test
@@ -31,6 +33,11 @@ public class SimpleTreeTest {
     @Test
     public void when7ElFindNotExitThenOptionEmpty() {
         assertThat(tree.findBy(7).isPresent(), is(false));
+    }
+
+    @Test
+    public void whenTreeIsBinary() {
+        assertThat(tree.isBinary(), is(false));
     }
 
     @Test

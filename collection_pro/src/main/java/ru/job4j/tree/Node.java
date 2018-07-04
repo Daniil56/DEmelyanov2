@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Node<E extends  Comparable<E>> {
         private final List<Node<E>> children = new ArrayList<>();
+    int index = 0;
 
 
     public E getValue() {
@@ -26,5 +27,25 @@ public class Node<E extends  Comparable<E>> {
 
         public boolean eqValue(E that) {
             return this.value.compareTo(that) == 0;
+        }
+
+        public boolean isBinary() {
+            boolean result = true;
+            if (leaves().size() > 2) {
+                result = false;
+            } else {
+                for (Node<E> node : leaves()) {
+                    if (!node.isBinary()) {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+
+
+
+
+
+            return result;
         }
     }
