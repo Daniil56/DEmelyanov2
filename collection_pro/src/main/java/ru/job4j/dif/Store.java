@@ -8,50 +8,31 @@ public class Store {
 
     Info diff(List<User> previoues, List<User> current) {
         Info info = new Info();
+        int changeindex = 0;
         String changes = "Changes";
         String added = "Added";
         String deleted = "Deleted";
         Set<User> changeSet = new HashSet<>();
-        Set<User> tempSet = new HashSet<>();
-        Set<User> addedSet = new HashSet<>();
-        Set<User> delSetTemp = new HashSet<>();
         Set<User> delSet = new HashSet<>();
 
         if (!previoues.containsAll(current)) {
             for (User listprev : previoues) {
                 for (User listcur : current) {
                     if (!(listprev.name.equals(listcur.name)) && listprev.id == listcur.id) {
-                        changeSet.add(listcur);
-                        info.add(changes, changeSet.size());
+                        changeindex++;
+                        info.add(changes, changeindex);
                     }
-
-                }
-            }
-            for (User listcurent : current) {
-                for (User listprev : previoues) {
-                    if (!(listprev.name.equals(listcurent.name) && listprev.id == listcurent.id)) {
-                        tempSet.add(listcurent);
-                        for (User u: tempSet) {
-                            if (!(previoues.contains(u)) && !changeSet.contains(u)) {
-                                addedSet.add(u);
-                            }
-                            if (!current.contains(listprev)) {
-                                delSetTemp.add(listprev);
-                                for (User o : delSetTemp) {
-                                    for (User i : changeSet) {
-                                        if (previoues.contains(o) && !current.contains(o) && !o.name.equals(i.name) && o.id != i.id) {
-                                            delSet.add(o);
-                                        }
-                                    }
-                                }
-                            }
+                        if (!previoues.contains(listcur)) {
+                            changeSet.add(listcur);
+                            info.add(added, changeSet.size() - changeindex);
                         }
-                        info.add(added, addedSet.size());
-                        info.add(deleted, delSet.size());
-                    }
-
+                        if (!current.contains(listprev)) {
+                        delSet.add(listprev);
+                        info.add(deleted, delSet.size() - changeindex);
+                        }
                 }
             }
+
         }
         return info;
     }
