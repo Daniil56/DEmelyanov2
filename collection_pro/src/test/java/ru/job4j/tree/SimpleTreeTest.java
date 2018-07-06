@@ -3,9 +3,7 @@ package ru.job4j.tree;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
