@@ -3,6 +3,7 @@ package ru.job4j.dif;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Store {
 
@@ -16,23 +17,28 @@ public class Store {
         Set<User> delSet = new HashSet<>();
 
         if (!previoues.containsAll(current)) {
-            for (User listprev : previoues) {
-                for (User listcur : current) {
-                    if (!(listprev.name.equals(listcur.name)) && listprev.id == listcur.id) {
-                        changeindex++;
-                        info.add(changes, changeindex);
-                    }
-                        if (!previoues.contains(listcur)) {
-                            changeSet.add(listcur);
-                            info.add(added, changeSet.size() - changeindex);
-                        }
-                        if (!current.contains(listprev)) {
-                        delSet.add(listprev);
-                        info.add(deleted, delSet.size() - changeindex);
-                        }
+           for (int preIndex = 0, postIndex = 0; preIndex < previoues.size() && postIndex < current.size(); postIndex++, preIndex++) {
+                if (!previoues.get(postIndex).name.equals(current.get(postIndex).name) && previoues.get(postIndex).id == current.get(postIndex).id) {
+                    changeindex++;
+                    info.add(changes, changeindex);
                 }
-            }
-
+                if (!previoues.contains(current.get(postIndex)) && previoues.size() >= current.size()) {
+                    changeSet.add(current.get(postIndex));
+                    info.add(added, changeSet.size() - changeindex);
+                } else {
+                    if (previoues.size() < current.size()) {
+                        info.add(added, current.size() - previoues.size() + changeindex);
+                    }
+                }
+                if (!(current.contains(previoues.get(preIndex)) && current.size() >= previoues.size())) {
+                    delSet.add(previoues.get(preIndex));
+                    info.add(deleted, delSet.size() - changeindex);
+                }  else {
+                    if (previoues.size() > current.size()) {
+                        info.add(deleted, previoues.size() - current.size() + changeindex);
+                    }
+                }
+           }
         }
         return info;
     }

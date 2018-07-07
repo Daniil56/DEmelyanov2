@@ -18,6 +18,8 @@ public class StoreTest {
     private Store.User user4 = new Store.User(1, "Oleg");
     private  Store.User user6 = new Store.User(4, "Yana");
     private Store.User user7 = new Store.User(5, "Yan");
+    private Store.User user8 = new Store.User(5, "Alex");
+
 
     @Before
     public void setUp() {
