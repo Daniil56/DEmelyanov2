@@ -1,9 +1,6 @@
 package ru.job4j.dif;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Store {
 
@@ -13,32 +10,27 @@ public class Store {
         String changes = "Changes";
         String added = "Added";
         String deleted = "Deleted";
-        Set<User> changeSet = new HashSet<>();
         Set<User> delSet = new HashSet<>();
+        Map<Integer, User> tmpMap = new HashMap<>();
 
         if (!previoues.containsAll(current)) {
-           for (int preIndex = 0, postIndex = 0; preIndex < previoues.size() && postIndex < current.size(); postIndex++, preIndex++) {
-                if (!previoues.get(postIndex).name.equals(current.get(postIndex).name) && previoues.get(postIndex).id == current.get(postIndex).id) {
-                    changeindex++;
-                    info.add(changes, changeindex);
+            for (User listcurr : current) {
+                if (!previoues.contains(listcurr)) {
+                    tmpMap.put(listcurr.id, listcurr);
                 }
-                if (!previoues.contains(current.get(postIndex)) && previoues.size() >= current.size()) {
-                    changeSet.add(current.get(postIndex));
-                    info.add(added, changeSet.size() - changeindex);
-                } else {
-                    if (previoues.size() < current.size()) {
-                        info.add(added, current.size() - previoues.size() + changeindex);
-                    }
+            }
+            for (User listprev : previoues) {
+                if (tmpMap.get(listprev.id) != null && current.contains(tmpMap.get(listprev.id))) {
+                   changeindex++;
+                   tmpMap.remove(listprev.id);
+                   info.add(changes, changeindex);
+                   info.add(added, tmpMap.size());
                 }
-                if (!(current.contains(previoues.get(preIndex)) && current.size() >= previoues.size())) {
-                    delSet.add(previoues.get(preIndex));
+                if (!current.contains(listprev)) {
+                    delSet.add(listprev);
                     info.add(deleted, delSet.size() - changeindex);
-                }  else {
-                    if (previoues.size() > current.size()) {
-                        info.add(deleted, previoues.size() - current.size() + changeindex);
-                    }
                 }
-           }
+            }
         }
         return info;
     }
