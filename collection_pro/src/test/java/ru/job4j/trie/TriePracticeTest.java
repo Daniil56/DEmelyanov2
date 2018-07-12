@@ -1,9 +1,8 @@
 package ru.job4j.trie;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
-
-import java.io.IOException;
 
 public class TriePracticeTest {
     @Test
@@ -23,5 +22,6 @@ public class TriePracticeTest {
         trie.add("dano");
         trie.add("danvos");
         trie.add("danvno");
+        assertThat(trie.isWord("dan"), is(true));
     }
 }

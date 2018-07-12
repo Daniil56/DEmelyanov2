@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TriePractice {
-        private char c =0;
+        private char c = 0;
         private TriePractice[] children;
         private boolean word;
         private int[] charArray = new int[27];
     private List<String> pattern = new ArrayList<>(26);
+    private List<Integer> indexlist = new ArrayList<>(26);
 
         public TriePractice() {
             this.c = 0;
@@ -30,14 +31,16 @@ public class TriePractice {
             }
              c = s.charAt(0);
             int indexChar = s.charAt(0) - 'a';
-
+            indexlist.add(indexChar);
             if (indexChar >= 0 & indexChar <= 26) {
                 charArray[indexChar]++;
                 s = s.substring(1); //удаляем обработанную букву из слова
                 if (charArray[indexChar] == 1) {
                     TriePractice nextWord = new TriePractice(s);
                     children[indexChar] = nextWord;
-                } else children[indexChar].add(s);
+                } else {
+                    children[indexChar].add(s);
+                }
             }
 
 
