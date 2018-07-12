@@ -26,7 +26,5 @@ public class AchoCorasicTest {
         word.add("dan");
         assertThat(word.seach("dan"), is(set));
         assertThat("dan".indexOf("i"), is(-1));
-
-
     }
 }

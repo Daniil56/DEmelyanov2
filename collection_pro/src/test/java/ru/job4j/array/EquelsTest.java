@@ -8,8 +8,8 @@ import static  org.hamcrest.Matchers.is;
 public class EquelsTest {
     @Test
     public void whenArrayWorldCompare2World() {
-        Equels eq = new Equels(new Integer[] {122, 112});
-        assertThat(eq.check(), is(false));
+        Equels eq = new Equels(new String[] {"ma", "mama"});
+        assertThat(eq.check("ma"), is(true));
     }
 
 }
