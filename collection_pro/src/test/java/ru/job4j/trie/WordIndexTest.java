@@ -19,7 +19,7 @@ public class WordIndexTest {
         set.add(11);
         set.add(13);
         WordIndex word = new WordIndex();
-        word.loadFile("C:\\Java course\\DEmelyanov2\\collection_pro\\input_with_split.txt");
+        word.loadFile("input_with_split.txt");
        assertThat(word.getIndexes4Word("dan"), is(set));
     }
 
@@ -31,7 +31,7 @@ public class WordIndexTest {
         set.add(11);
         set.add(13);
         WordIndex word = new WordIndex();
-        word.loadFileWithoutSplit("C:\\Java course\\DEmelyanov2\\collection_pro\\input_without_split.txt");
+        word.loadFileWithoutSplit("input_without_split.txt");
         assertThat(word.getIndexes4AhoAloritm("dan"), is(set));
 
     }
