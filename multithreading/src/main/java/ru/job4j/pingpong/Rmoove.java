@@ -11,22 +11,20 @@ public class Rmoove implements Runnable {
 
     @Override
     public void run() {
+        int x = 1;
         synchronized (this) {
-            while (this.rect.getX() <= 300) {
-                this.rect.setX(this.rect.getX() + 1);
-                if (rect.getX() >= 300) {
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                } else if (rect.getX() == 1) {
-                    run();
-                }
+            while (true) {
+                this.rect.setX(this.rect.getX() + x);
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(30);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }
+                if (this.rect.getX() == 290) {
+                    x = -1;
+                }
+                if (this.rect.getX() == 5) {
+                    x = 1;
                 }
             }
         }
