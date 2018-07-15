@@ -1,5 +1,6 @@
 package ru.job4j.pingpong;
 
+import javafx.scene.control.Dialog;
 import javafx.scene.shape.Rectangle;
 
 public class Rmoove implements Runnable {
@@ -16,7 +17,7 @@ public class Rmoove implements Runnable {
             while (true) {
                 this.rect.setX(this.rect.getX() + x);
                 try {
-                    Thread.sleep(30);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
