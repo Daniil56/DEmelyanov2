@@ -1,24 +1,21 @@
 package ru.job4j.array;
 
-import ru.job4j.trie.AchoCorasic;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-public class Equels<E> {
+
+
+public class Equels {
     private String[] array;
 
     public Equels(String[] array) {
         this.array = array;
     }
 
-    public boolean check(String s) {
-        boolean result;
-        AchoCorasic trie = new AchoCorasic(10);
-        for (String anArray : this.array) {
-            trie.add(anArray);
-        }
-        result = trie.isWord(s);
-        return result;
+    public boolean check() {
+        char[] word1 = array[0].toCharArray();
+        char[] word2 = array[1].toCharArray();
+        Arrays.sort(word1);
+        Arrays.sort(word2);
+        return Arrays.equals(word1, word2);
     }
 }
