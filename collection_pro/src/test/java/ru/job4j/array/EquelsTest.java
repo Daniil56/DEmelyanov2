@@ -10,5 +10,6 @@ public class EquelsTest {
     public void whenArrayWorldCompare2World() {
         Equels eq = new Equels(new String[] {"amma", "mama"});
         assertThat(eq.check(), is(true));
+        assertThat(eq.checkInMap(), is(true));
     }
 }
