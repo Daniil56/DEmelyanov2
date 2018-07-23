@@ -14,12 +14,12 @@ public class Rmoove implements Runnable {
     public void run() {
         int x = 1;
         synchronized (this) {
-            while (true) {
+            while (!Thread.currentThread().isInterrupted()) {
                 this.rect.setX(this.rect.getX() + x);
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Thread.currentThread().interrupt();
                 }
                 if (this.rect.getX() == 290) {
                     x = -1;
