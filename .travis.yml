@@ -3,9 +3,12 @@ sudo: false
 
 jdk:
   - oraclejdk8
-  fixes: - "io/github/config4k::src/main/io.github.config4k"
 after_success:
       - bash <(curl -s https://codecov.io/bash)
+
+fixes:
+  - "io/github/config4k::src/main/io.github.config4k"
+
 notifications:
   email:
     recipients:
