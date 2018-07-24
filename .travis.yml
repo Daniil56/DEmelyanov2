@@ -2,18 +2,8 @@ language: java
 
 
 sudo: false
-branches:
-  only:
-    - master
-    - /^release.*$/
-
 jdk:
   - oraclejdk8
-
-before_install:
-  - chmod +x gradlew
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email:
