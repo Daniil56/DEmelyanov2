@@ -3,17 +3,17 @@ jdk:
   - oraclejdk8
   sudo: false
 after_success:
-   - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
   before_script:
-   - echo "Starting build"
+  - echo "Starting build"
 scrypt:
--mvn clean package
+  - mvn clean package
 after_script:
-- echo "Script finished"
+  - echo "Script finished"
 after_success:
- - echo "Build was successful. $TRAVIS_TEST_RESULT"
+  - echo "Build was successful. $TRAVIS_TEST_RESULT"
  after_failure:
-- echo "Build was failed"
+  - echo "Build was failed"
 
 
 notifications:
