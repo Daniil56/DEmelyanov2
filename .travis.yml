@@ -1,14 +1,10 @@
 language: java
+sudo: false
 
 jdk:
   - oraclejdk8
-    sudo: false
-    after_success:
+after_success:
       - bash <(curl -s https://codecov.io/bash)
-
-
-
-
 notifications:
   email:
     recipients:
