@@ -1,13 +1,15 @@
 language: java
 sudo: false
 
+language: java
+
 jdk:
   - oraclejdk8
-after_success:
-      - bash <(curl -s https://codecov.io/bash)
 
-fixes:
-  - "io/github/config4k::src/main/io.github.config4k"
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
 
 notifications:
   email:
