@@ -2,8 +2,7 @@ language: java
 jdk:
   - oraclejdk8
   sudo: false
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+
   before_script:
   - echo "Starting build"
 scrypt:
@@ -11,7 +10,7 @@ scrypt:
 after_script:
   - echo "Script finished"
 after_success:
-  - echo "Build was successful. $TRAVIS_TEST_RESULT"
+  - bash <(curl -s https://codecov.io/bash)
  after_failure:
   - echo "Build was failed"
 
