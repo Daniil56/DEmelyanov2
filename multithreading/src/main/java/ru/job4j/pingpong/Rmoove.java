@@ -1,6 +1,5 @@
 package ru.job4j.pingpong;
 
-import javafx.scene.control.Dialog;
 import javafx.scene.shape.Rectangle;
 
 public class Rmoove implements Runnable {
