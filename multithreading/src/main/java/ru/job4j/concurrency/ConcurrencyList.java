@@ -51,7 +51,7 @@ public class ConcurrencyList<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<>() {
+        return new Iterator<E>() {
             @Override
             public boolean hasNext() {
                 return index > count;
