@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.RepeatedTest
 
 internal class ConcurrencyFirstLastListTest {
-    private var storage = ConcurrencyFirstLastList<Int>()
+    private val storage = ConcurrencyFirstLastList<Int>()
 
     @BeforeEach
     private fun setUp() {
