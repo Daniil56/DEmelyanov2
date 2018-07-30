@@ -18,7 +18,7 @@ public class ConcurrentCache {
 
     public void upDateValue(int  id, int value) {
       final   int oldVersion = map.get(id).getVersion();
-        this.map.computeIfPresent(id,new BiFunction<Integer, Base, Base>() {
+        this.map.computeIfPresent(id, new BiFunction<Integer, Base, Base>() {
             @Override
             public Base apply(Integer integer, Base base) {
                 if (oldVersion == base.getVersion()) {
