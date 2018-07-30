@@ -22,8 +22,8 @@ public class ConcurrentCache {
             @Override
             public Base apply(Integer integer, Base base) {
                 if (oldVersion == base.getVersion()) {
-                    base.setValue(value);
                     base.incrementVersion();
+                    base.setValue(value);
                 } else {
                     try {
                         throw new OptimisticException("optimistic exception");
