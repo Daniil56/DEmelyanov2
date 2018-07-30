@@ -53,7 +53,8 @@ public  class  UserStorage {
 
     public Map<Integer, User> getUserMap() {
         synchronized (this) {
-            return userMap;
+            Map<Integer, User> copyMap = userMap;
+            return copyMap;
         }
     }
 }
