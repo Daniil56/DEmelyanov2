@@ -1,23 +1,37 @@
 package ru.job4j.concurrency
 
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.RepeatedTest
+import org.junit.jupiter.api.Test
 
 internal class ConcurrencyFirstLastListTest {
     private val storage = ConcurrencyFirstLastList<Int>()
 
-    @BeforeEach
-    private fun setUp() {
+    inner class StorageAdd constructor(private var storage: ConcurrencyFirstLastList<Int>, private val value: Int) : Thread() {
+        override fun run() {
+            this.storage.offer(value)
+        }
+    }
+
+    inner class StoragePoll constructor(private var storage: ConcurrencyFirstLastList<Int>) : Thread() {
+        override fun run() {
+            this.storage.poll()
+        }
+    }
+
+    @Test()
+    fun whenAddThenConcurrency() {
         val a = StorageAdd(storage, 1)
         val b = StorageAdd(storage, 2)
-        val c = StorageAdd(storage, 3)
-        val d = StorageAdd(storage, 4)
-        val e = StorageAdd(storage, 5)
+        val c = StoragePoll(storage)
+        val d = StorageAdd(storage, 3)
+        val e = StorageAdd(storage, 4)
+        storage.poll()
         a.start()
         b.start()
         c.start()
+        println(storage + " ")
+        storage.poll()
         d.start()
         e.start()
         a.join()
@@ -27,96 +41,53 @@ internal class ConcurrencyFirstLastListTest {
         e.join()
     }
 
-    inner class StorageAdd constructor(private var storage : ConcurrencyFirstLastList<Int>, private val value: Int) : Thread() {
-        override fun run() {
-            this.storage.add(value)
+    @Test
+    fun severalThreadsWorkWithCollection() {
+        for (i in 0..199) {
+            val t = object : Thread() {
+                override fun run() {
+                    for (j in 0..999) {
+                        storage.offer(10)
+                    }
+                }
+            }
+            t.start()
+            t.join()
         }
-    }
-    inner class StorageInsertFirst constructor(private var storage : ConcurrencyFirstLastList<Int>, private val value: Int) : Thread() {
-        override fun run() {
-                this.storage.insetFirst(value)
-
+        var sum = 0
+        for (anInt in storage) {
+            sum += anInt
         }
+        assertThat(sum, `is`(2000000))
     }
-    inner class StorageDeleteFirst constructor(private var storage : ConcurrencyFirstLastList<Int>) : Thread() {
-        override fun run() {
-            this.storage.deleteFirst()
+
+    @Test
+    fun givenListCreatedByVarArgsConstructorWhenAddItemsThenItemsAreReachable() {
+        val ints = ConcurrencyFirstLastList(5, 10)
+        assertThat(ints.get(0), `is`(5))
+        assertThat(ints.get(1), `is`(10))
+        assertThat(ints.size(), `is`(2))
+        ints.offer(15)
+        assertThat(ints.get(2), `is`(15))
+        assertThat(ints.size(), `is`(3))
+
+    }
+
+    @Test()
+    fun givenIteratorWhenGoesOverBorderThenThrowException() {
+        val ints = ConcurrencyFirstLastList(5, 6, 3)
+        val it = ints.iterator()
+        assertThat(it.hasNext(), `is`(true))
+        assertThat(it.next(), `is`(5))
+        assertThat(it.next(), `is`(6))
+        assertThat(it.next(), `is`(3))
+        assertThat(it.hasNext(), `is`(false))
+        try {
+            it.next()
+        } catch (e : NoSuchElementException) {
+            println("no such")
         }
-    }
-    inner class StorageDeleteLAst constructor(private var storage : ConcurrencyFirstLastList<Int>) : Thread() {
-        override fun run() {
-            this.storage.deleteLast()
-        }
-    }
 
-    /**
-     * Все значение гарантированно добавляются в коллекцию.
-     * Без гарантии порядка добавления.
-     */
-    @RepeatedTest(10)
-    fun whenAddThenConcurrency() {
-        assertThat(storage.size, `is`(5))
-        println(storage + " ")
-    }
-
-    /**
-     * Производит гарантировнную вставку а начало списка
-     */
-    @RepeatedTest(10)
-    fun whenInSertFirstThenConcerrency() {
-        val f = StorageInsertFirst(storage, 6)
-        val g = StorageInsertFirst(storage, 7)
-        val h = StorageInsertFirst(storage, 8)
-        val s = StorageInsertFirst(storage, 9)
-        val i = StorageInsertFirst(storage, 10)
-        f.start()
-        g.start()
-        h.start()
-        s.start()
-        i.start()
-        f.join()
-        g.join()
-        h.join()
-        s.join()
-        i.join()
-        assertThat(storage.size, `is`(10))
-        println(storage + "")
-    }
-
-    @RepeatedTest(10)
-    fun whenInDeleteFirstThenConcerrency() {
-        val f = StorageDeleteFirst(storage)
-        val g = StorageDeleteFirst(storage)
-        val h = StorageDeleteFirst(storage)
-        val s = StorageDeleteFirst(storage)
-        f.start()
-        g.start()
-        h.start()
-        s.start()
-        f.join()
-        g.join()
-        h.join()
-        s.join()
-        assertThat(storage.size, `is`(1))
-
-        println(storage + " ")
-    }
-
-    @RepeatedTest(10)
-    fun whenInDeleteLastThenConcerrency() {
-        val f = StorageDeleteLAst(storage)
-        val g = StorageDeleteLAst(storage)
-        val h = StorageDeleteLAst(storage)
-        val s = StorageDeleteLAst(storage)
-        f.start()
-        g.start()
-        h.start()
-        s.start()
-        f.join()
-        g.join()
-        h.join()
-        s.join()
-        assertThat(storage.size, `is`(1))
-        println(storage + " ")
     }
 }
+
