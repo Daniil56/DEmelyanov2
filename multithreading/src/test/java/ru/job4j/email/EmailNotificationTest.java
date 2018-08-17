@@ -14,7 +14,7 @@ public class EmailNotificationTest {
         email.mailTo(daniil);
         assertThat(email.isReady(), is(false));
         email.close();
-        assertThat(email.isReady(), is(false));
+        assertThat(email.isReady(), is(true));
 
 
     }
