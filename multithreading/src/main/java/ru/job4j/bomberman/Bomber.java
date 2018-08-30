@@ -18,15 +18,14 @@ public class Bomber extends  Thread {
     public void run() {
         Random random = new Random();
         board.occupied(position);
-        while (aLive) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Cell nextCell = new Cell(position.getX() + (random.nextInt(2) - 1), position.getY() + (random.nextInt(2) - 1));
-            if (board.moove(position, nextCell)) {
-                this.position = nextCell;
+        while (!isInterrupted()) {
+            if (aLive) {
+                board.tryLock(position);
+                aLive = false;
+                Cell nextCell = new Cell(position.getX() + (random.nextInt(2) - 1), position.getY() + (random.nextInt(2) - 1));
+                if (board.moove(position, nextCell)) {
+                    this.position = nextCell;
+                }
             }
         }
     }

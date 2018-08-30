@@ -25,18 +25,27 @@ public class Board {
 
     boolean moove(Cell source, Cell dest) {
         boolean result = false;
+            if (dest.getX() >= 0 && dest.getX() <= this.x && dest.getY() >= 0 && dest.getY() <= this.y) {
+                result = tryLockCell(source, dest);
+                System.out.println("Поток " + Thread.currentThread().getId() + " смещен на координаты X = " + dest.getX() + ": Y= " + dest.getY());
+            }
+
+        return result;
+    }
+
+    public boolean tryLockCell(Cell source, Cell dest) {
         try {
-            if (dest.getX() >= 0 && dest.getX() <= this.x && dest.getY() >= 0 && dest.getY() <= this.y && this.board[dest.getX()][dest.getY()].tryLock(500, TimeUnit.MILLISECONDS)) {
-                result = true;
-                System.out.println("Поток " + Thread.currentThread().getId() + "смещен на координаты X = " + dest.getX() + ": Y= " + dest.getY());
+            if (this.board[dest.getX()][dest.getY()].tryLock(500, TimeUnit.MILLISECONDS)) {
                 board[source.getX()][source.getY()].unlock();
-
-
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return result;
+        return false;
+    }
+
+    public void tryLock(Cell source) {
+        board[source.getX()][source.getY()].lock();
     }
 
     public boolean occupied(Cell cell) {
