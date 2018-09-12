@@ -8,50 +8,36 @@ public class EmailNotification {
   private final ExecutorService pool = Executors.newFixedThreadPool(
             Runtime.getRuntime().availableProcessors()
     );
-  private boolean ready = false;
-  private String subject;
-  private String body;
 
-    public boolean isReady() {
-        return ready;
-    }
 
     public void emailTo(User user) {
-        this.subject = "Notification for " + user.getUserName() + "to email " + user.getEmail();
-        this.body = "Add a new event to " + user.getUserName();
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String subject = "Notification " + user.getUserName() + " email: " + user.getEmail();
+            String body = "Add new event to " + user.getUserName();
+              send(subject, body, user.getEmail());
+
+            }
+        });
     }
 
     public void send(String subject, String body, String email) {
         System.out.println("Execute " + Thread.currentThread().getName());
+        System.out.println("subject " + subject);
+        System.out.println("body " + body);
+        System.out.println("email " + email);
+
+
 
     }
 
-    public void mailTo(User user) {
-        pool.submit(new Runnable() {
-            @Override
-            public void run() {
-                emailTo(user);
-                ready = true;
-                this.notifyAll();
-                System.out.println("Execute " + Thread.currentThread().getName());
 
-            }
-        });
-        pool.submit(new Runnable() {
-            @Override
-            public void run() {
-                while (!ready) {
-                    try {
-                        this.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                send(subject, body, user.getEmail());
-                ready = false;
-            }
-        });
-    }
 
     public void close() {
         pool.shutdown();
