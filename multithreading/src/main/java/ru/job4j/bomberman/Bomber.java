@@ -1,7 +1,5 @@
 package ru.job4j.bomberman;
 
-import java.util.Random;
-
 public class Bomber extends  Thread {
     private boolean aLive;
     private Cell position;
@@ -16,17 +14,20 @@ public class Bomber extends  Thread {
 
     @Override
     public void run() {
-        Random random = new Random();
         board.occupied(position);
-        while (!isInterrupted()) {
-            if (aLive) {
-                board.tryLock(position);
-                aLive = false;
-                Cell nextCell = new Cell(position.getX() + (random.nextInt(2) - 1), position.getY() + (random.nextInt(2) - 1));
-                if (board.moove(position, nextCell)) {
+        while (aLive) {
+                try {
+                    sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Cell nextCell = new Cell(
+                        position.getX() + board.getShiftX(),
+                        position.getY() + board.getShiftY());
+                if (board.move(position, nextCell)) {
                     this.position = nextCell;
                 }
             }
         }
     }
-}
+
