@@ -16,8 +16,8 @@ public class SimpleBlockingQueue<T> {
         return this.queue;
     }
 
-    public synchronized void offer(T value) {
-        synchronized (queue) {
+    public void offer(T value) {
+        synchronized (this) {
             while (block) {
                 try {
                     wait();
@@ -34,9 +34,9 @@ public class SimpleBlockingQueue<T> {
 
     }
 
-    public synchronized T poll() throws InterruptedException {
-        synchronized (queue) {
-            while (queue.size() == 0 || !block) {
+    public  T poll() throws InterruptedException {
+        synchronized (this) {
+            while (queue.isEmpty()) {
                 wait();
             }
             block = false;
@@ -45,5 +45,9 @@ public class SimpleBlockingQueue<T> {
             System.out.println(value + " удаленно из очереди ");
             return value;
         }
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
     }
 }
