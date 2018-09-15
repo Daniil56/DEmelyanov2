@@ -2,26 +2,22 @@ package ru.job4j.buffer;
 
 import ru.job4j.concurrency.SimpleBlockingQueue;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class ParallelSeach {
-    public static void main(String[] args) {
-        AtomicBoolean lock = new AtomicBoolean(false);
+    public static void main(String[] args) throws InterruptedException {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
         final Thread consumer = new Thread(
                 () -> {
-                    while (!lock.get()) {
+                    while (!Thread.currentThread().isInterrupted()) {
                         try {
-                            System.out.println(queue.poll());
+                                System.out.println(queue.poll());
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
-                            Thread.currentThread().interrupt();
+                           System.out.println("Consumer complete");
                         }
                     }
                 }
         );
         consumer.start();
-         new Thread(
+         Thread producer = new Thread(
                 () -> {
                         for (int index = 0; index != 3; index++) {
                             try {
@@ -31,13 +27,13 @@ public class ParallelSeach {
                                 e.printStackTrace();
                                 Thread.currentThread().interrupt();
                             }
-                            if (index >= 1) {
-                                lock.set(true);
-                            }
                         }
 
                 }
 
-        ).start();
+        );
+         producer.start();
+         producer.join();
+         consumer.interrupt();
     }
 }
