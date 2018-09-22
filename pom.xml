@@ -20,6 +20,7 @@
         <module>chapter_003</module>
         <module>collection_pro</module>
         <module>multithreading</module>
+        <module>labmda_fp_stream</module>
     </modules>
 	 
 	 <dependencies>
