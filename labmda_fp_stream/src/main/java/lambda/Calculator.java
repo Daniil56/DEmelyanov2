@@ -1,5 +1,6 @@
 package lambda;
 
+import ru.job4j.calculator.MathUtil;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
@@ -15,14 +16,7 @@ public class Calculator {
 
     public static void main(String[] args) {
         Calculator calc = new Calculator();
-        calc.multiple(0, 10, 2,
-                (value, index) -> {
-                    double result = value * index;
-                    System.out.printf("Multiple %s * %s = %s %n", value, index, result);
-                    return result;
-                },
-                System.out::println
-        );
+        calc.multiple(0, 10, 2, MathUtil::add, System.out::println);
 
     }
 }

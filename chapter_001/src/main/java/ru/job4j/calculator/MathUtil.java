@@ -1,10 +1,11 @@
-package ru.job4j;
+package ru.job4j.calculator;
 
-public class Calculator {
-	private double result = 0;
+public class MathUtil {
+	private static double result = 0;
 	
-	public void  add(double first, double second) {
-		this.result = first + second;
+	public static double  add(double first, double second) {
+		result = first + second;
+		return result;
 	}
 	public void subtract(double first, double second) {
 		this.result = first - second;
