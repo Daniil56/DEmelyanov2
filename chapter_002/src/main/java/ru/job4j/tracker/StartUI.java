@@ -13,9 +13,7 @@ public class StartUI {
     }
 
     private static void accept(List<UserAction> a) {
-        for (UserAction action : a) {
-            System.out.println(action.info());
-        }
+        a.forEach(userAction -> System.out.println(userAction.info()));
     }
 
     public void init() {
