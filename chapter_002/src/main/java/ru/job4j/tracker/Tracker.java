@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Predicate;
 
 public class Tracker {
     private List<Item> items = new ArrayList<>();
@@ -29,7 +32,7 @@ public class Tracker {
 
     public void replace(Item item) {
         for (Item i : items) {
-            if (item.getId().equals(i.getId()) && item.getId() != null) {
+            if (findById(item.getId()).equals(i) && item.getId() != null) {
                 items.add(items.indexOf(i), item);
                 break;
            }
@@ -38,17 +41,18 @@ public class Tracker {
 
     public void  delete(String id) {
         for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
-                items.remove(items.indexOf(item));
+            if (findById(id).equals(item)) {
+                items.remove(item);
                 break;
             }
         }
     }
 
     public List<Item> findByName(String key) {
+        Predicate<String> predicate = p -> p.equals(key);
         List<Item> result = new ArrayList<>();
         for (Item item : items) {
-        if (item != null && item.getName().equals(key)) {
+        if (predicate.test(item.getName())) {
             result.add(item);
             }
         }
@@ -56,9 +60,10 @@ public class Tracker {
     }
 
     public Item findById(String id) {
-        Item result = null;
+        Predicate<String> predicate = p -> p.equals(id);
+         Item result = null;
         for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
+            if (predicate.test(item.getId())) {
                 result = item;
                 break;
             }
