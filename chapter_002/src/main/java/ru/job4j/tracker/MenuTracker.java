@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 class ShowItems extends BaseAction {
     ShowItems(int key, String name) {
@@ -48,13 +49,10 @@ public class MenuTracker {
     }
 
 
-    public void show() {
-        for (UserAction action : this.actions) {
-            if (action != null) {
-                System.out.println(action.info());
-            }
-        }
+    public void show(Consumer<List<UserAction>> consumer) {
+           consumer.accept(actions);
     }
+
     public void select(int key) {
         this.actions.get(key).execute(this.input, this.tracker);
     }
