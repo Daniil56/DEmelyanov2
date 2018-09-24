@@ -17,7 +17,7 @@ public class Bomber extends  Thread {
         board.occupied(position);
         while (aLive) {
                 try {
-                    sleep(500);
+                    sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

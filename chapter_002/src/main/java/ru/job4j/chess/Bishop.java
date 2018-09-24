@@ -1,5 +1,10 @@
 package ru.job4j.chess;
 
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 /**
  * Класс фигуры слон
  * @author Daniil Emelyanov
@@ -25,17 +30,34 @@ public class Bishop extends Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImposableMoveException {
-        // счетчик индекса пути фигуры
-        int count = 1;
-        int size = source.getX() + 1;
-        // путь фигуры
-        Cell[] currentCourse = new Cell[size];
+        BiPredicate<Cell, Cell> predicate = this::diagonal;
+        BiFunction<Cell, Cell, Cell[]> biFunction = this::difference;
         // координаты по x и по y должны быть равны по модулю, так как слол ходит только по диагонали
-        if (Math.abs(dest.getX() - source.getX()) != Math.abs(dest.getY() - source.getY())) {
+        if (predicate.test(source, dest)) {
             throw new ImposableMoveException("Movement can not be made");
         }
-        // Проверяем, что разница между начальной и конечной координатой меньше либо равна -1, так как
-        // слон ходит только по диагонали
+
+        return biFunction.apply(source, dest);
+    }
+    @Override
+    public Figure copy(Cell dest) {
+        return new Bishop(dest);
+    }
+
+    private boolean diagonal(Cell source, Cell dest) {
+        Predicate<Cell> predicate = abs -> Math.abs(dest.getX() - source.getX()) != Math.abs(dest.getY() - source.getY());
+        return predicate.test(dest);
+    }
+
+    private Cell[] difference(Cell source, Cell dest) {
+        Function<Cell, Cell[]> function = cell -> {
+            // счетчик индекса пути фигуры
+            int count = 1;
+            int size = source.getX() + 1;
+            // путь фигуры
+            Cell[] currentCourse = new Cell[size];
+            // Проверяем, что разница между начальной и конечной координатой меньше либо равна -1, так как
+            // слон ходит только по диагонали
             if ((source.getX() - dest.getX()) <= -1 && (source.getY() - dest.getY()) <= -1) {
                 // проходим в цикле логику пути фигуры, где начальным точккам X и Y на первой итерации прибавляем  один шаг
                 // затем инкрементируем
@@ -45,10 +67,9 @@ public class Bishop extends Figure {
                     count++;
                 }
             }
-        return currentCourse;
+            return currentCourse;
+        };
+        return function.apply(dest);
     }
-    @Override
-    public Figure copy(Cell dest) {
-        return new Bishop(dest);
-    }
+
 }

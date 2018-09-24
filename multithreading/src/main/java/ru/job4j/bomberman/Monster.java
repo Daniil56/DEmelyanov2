@@ -22,7 +22,7 @@ public class Monster extends Thread {
         board.occupied(position);
         while (aLive) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

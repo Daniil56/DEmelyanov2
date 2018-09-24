@@ -66,7 +66,7 @@ public class Board {
 
     private void tryLockCell(Cell source, Cell dest) {
         try {
-            if (this.board[dest.getX()][dest.getY()].tryLock(500, TimeUnit.MILLISECONDS)) {
+            if (this.board[dest.getX()][dest.getY()].tryLock(1, TimeUnit.MILLISECONDS)) {
                 board[source.getX()][source.getY()].unlock();
             }
         } catch (InterruptedException e) {
@@ -82,7 +82,7 @@ public class Board {
         boolean result = false;
         try {
             result = cell.getX() >= 0 && cell.getX() <= this.x && cell.getY() >= 0 && cell.getY() <= this.y
-                    && this.board[cell.getX()][cell.getY()].tryLock(500, TimeUnit.MILLISECONDS);
+                    && this.board[cell.getX()][cell.getY()].tryLock(1, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

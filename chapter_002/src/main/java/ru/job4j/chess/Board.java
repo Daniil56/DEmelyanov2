@@ -1,5 +1,7 @@
 package ru.job4j.chess;
 
+import java.util.function.Predicate;
+
 /**
  * Класс шахматной доски.
  * @author Daniil Emelyanov
@@ -29,10 +31,11 @@ public class Board {
             OccupiedWayException,
             FigureNotFoundException {
         for (int index = 0; index < figures.length; index++) {
-            if (figures[index] != null && figures[index].position.equals(source)) {
+            Predicate<Cell> predicate = p -> p.equals(figures[index].position);
+            if (source != null && predicate.test(source)) {
             Cell[] route = figures[index].way(source, dest);
                 for (Cell busy: route) {
-                    if (figures[index] != null && figures[index].position.equals(busy)) {
+                    if (busy != null && predicate.test(busy)) {
                         throw  new OccupiedWayException("the route is busy");
                     }
                 }
