@@ -1,6 +1,6 @@
 package ru.job4j.seach;
-import java.text.Collator;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.stream.IntStream;
 
 public class PriorityQueue {
     private LinkedList<Task> tasks = new LinkedList<>();
@@ -13,13 +13,8 @@ public class PriorityQueue {
      */
     public void  put(Task task) {
         tasks.add(task);
-        for (int index = 0; index < tasks.size(); index++) {
-            if (task.getPriority() < tasks.get(index).getPriority()) {
-                tasks.add(index, task);
-                break;
-            }
-
-        }
+        IntStream.range(0, tasks.size()).filter(index -> task.getPriority() < tasks.get(index).getPriority())
+                .findFirst().ifPresent(index -> tasks.add(index, task));
     }
 
     public Task take() {

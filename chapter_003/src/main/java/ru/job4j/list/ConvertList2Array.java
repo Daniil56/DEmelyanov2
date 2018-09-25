@@ -1,7 +1,9 @@
 package ru.job4j.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConvertList2Array {
 
@@ -16,7 +18,7 @@ public class ConvertList2Array {
             if (index == cells) {
                 index = 0;
                 count++;
-                }
+            }
         }
         return array;
     }
@@ -29,6 +31,6 @@ public class ConvertList2Array {
             }
 
         }
-        return result;
+        return list.stream().flatMapToInt(Arrays::stream).boxed().collect(Collectors.toList());
     }
     }

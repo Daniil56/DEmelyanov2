@@ -2,6 +2,7 @@ package ru.job4j.review;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Convert {
     /**
@@ -37,7 +38,7 @@ public class Convert {
                     list.add(out);
             }
         }
-        return list;
+        return Arrays.stream(array).flatMapToInt(Arrays::stream).boxed().collect(Collectors.toList());
     }
 
     /**

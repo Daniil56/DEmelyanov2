@@ -15,14 +15,14 @@ public class SortDepartaments {
      */
     public Set<String> sortDepartments(String[] values) {
         TreeSet<String> temp = new TreeSet<>();
-        for (String value: values) {
+        Arrays.stream(values).forEach(value -> {
             StringBuilder builder = new StringBuilder();
-            for (String s : value.split("\\\\")) {
+            Arrays.stream(value.split("\\\\")).forEach(s -> {
                 builder.append(s);
                 temp.add(builder.toString());
                 builder.append("\\");
-            }
-        }
+            });
+        });
         return temp;
     }
 
