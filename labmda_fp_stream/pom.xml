@@ -22,14 +22,4 @@
             </plugin>
         </plugins>
     </build>
-    <dependencies>
-        <dependency>
-            <groupId>ru.job4j</groupId>
-            <artifactId>chapter_001</artifactId>
-            <version>2.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
-
 </project>

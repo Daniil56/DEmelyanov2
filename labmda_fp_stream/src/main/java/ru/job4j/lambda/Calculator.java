@@ -1,4 +1,4 @@
-package lambda;
+package ru.job4j.lambda;
 
 import ru.job4j.calculator.MathUtil;
 import java.util.function.BiFunction;
