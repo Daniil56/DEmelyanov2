@@ -2,10 +2,9 @@ package ru.job4j.bank;
 
 import ru.job4j.user.User;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Bank {
     private Map<User, ArrayList<Account>> userListMap = new TreeMap<>();
@@ -18,13 +17,10 @@ public class Bank {
     public void deleteUser(User user) {
         this.userListMap.remove(user);
     }
-    public void addAccountToUser(String passport, Account account) {
-           for (User user: this.userListMap.keySet()) {
-               if (user.getPasport().equals(passport)) {
-                   this.userListMap.get(user).add(account);
-               }
-           }
 
+    public void addAccountToUser(String passport, Account account) {
+        this.userListMap.keySet().stream().filter(
+                user -> user.getPasport().equals(passport)).forEach(user -> this.userListMap.get(user).add(account));
         }
 
     public void deleteAccountFromUser(User user, Account account) {
@@ -32,51 +28,29 @@ public class Bank {
     }
 
     public List<Account> getUserAccount(String passport) {
-           List<Account> list = new ArrayList<>();
-           for (User key: this.userListMap.keySet()) {
-              if (key.getPasport().equals(passport)) {
-                  list = this.userListMap.get(key);
-              }
-
-           }
-           return list;
+           return  this.userListMap.keySet().stream().filter(user -> user.getPasport().equals(passport))
+                   .flatMap(user -> userListMap.get(user).stream()).collect(Collectors.toList());
     }
 
     public boolean getUserRequisites(String requisites) {
-        boolean equals = false;
-        for (User user: this.userListMap.keySet()) {
-            if (this.userListMap.get(user).contains(getAccountActual(requisites))) {
-                equals = true;
-        }
-
-        }
-        return equals;
+        Predicate<ArrayList<Account>> predicate = p -> p.contains(getAccountActual(requisites));
+        return userListMap.keySet().stream().filter(user -> predicate.test(userListMap.get(user)))
+                .allMatch(user -> predicate.test(userListMap.get(user)));
     }
 
     public boolean getUserPassport(String passport) {
-        boolean equals = false;
-        for (User user: this.userListMap.keySet()) {
-            if (user.getPasport().equals(passport)) {
-                equals = true;
-            }
-
-        }
-        return equals;
+        Predicate<User> predicate = p -> p.getPasport().equals(passport);
+        return userListMap.keySet().stream().anyMatch(predicate);
     }
 
     private Account getAccountActual(String requisites) {
-        Account actual = new Account();
-        for (ArrayList<Account> list : this.userListMap.values()) {
-            for (Account account: list) {
-                if (account.getRequisites().equals(requisites)) {
-                    actual = account;
-            }
-
-            }
-        }
-        return actual;
+        return userListMap.values().stream().flatMap(Collection::stream)
+                .filter(account -> account.getRequisites().equals(requisites))
+                .collect(Collectors.toCollection(ArrayList::new)).iterator().next();
     }
+
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
        return   getUserPassport(destPassport) && getUserPassport(srcPassport) && getUserRequisites(srcRequisite) && getUserRequisites(destRequisite) &&  getAccountActual(srcRequisite).transfer(getAccountActual(destRequisite), amount);
     }
+
 }

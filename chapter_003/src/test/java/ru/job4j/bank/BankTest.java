@@ -3,11 +3,13 @@ package ru.job4j.bank;
 import org.junit.Test;
 import ru.job4j.user.User;
 
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class BankTest {
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void whenMapThenAddUser() {
         Bank bank = new Bank();
         User daniil = new User("Daniil", "1852638");
@@ -25,6 +27,8 @@ public class BankTest {
         bank.addAccountToUser("1852638", accountDaniil);
         bank.addAccountToUser("1852638", accountDaniil2);
         assertThat(bank.transferMoney("1852638", "123456", "1852638", "654321", 500), is(true));
+        assertThat(bank.transferMoney("1852638", "1234567", "1852638", "654321", 500), is(false));
+        assertThat(bank.transferMoney("18526389", "123456", "18526318", "654321", 500), is(false));
     }
 
     @Test
