@@ -118,7 +118,11 @@
                 <phase>test-compile</phase>
                 <goals> <goal>testCompile</goal> </goals>
             </execution>
-        </executions>
+        </executions>  <configuration>
+        <source>9</source>
+        <target>9</target>
+    </configuration>
+
     </plugin>
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
