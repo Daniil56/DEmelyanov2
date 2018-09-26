@@ -17,14 +17,14 @@ public class BomberTest {
     }
     @Test
     public void whenBoard12X12ThreeMonstersAndFourStones() throws InterruptedException {
-        Board board = new Board(12, 12, 3, 4);
-        for (int position = 1; position < 12; position++) {
-                Thread.sleep(500);
+        Board board = new Board(3, 3, 1, 1);
+        for (int position = 1; position < 2; position++) {
+                Thread.sleep(5);
                 board.setShiftX(1);
                 board.setShiftY(1);
         }
-        for (int position = 1; position < 12; position++) {
-                Thread.sleep(500);
+        for (int position = 1; position < 2; position++) {
+                Thread.sleep(5);
                 board.setShiftX(-1);
                 board.setShiftY(-1);
         }
