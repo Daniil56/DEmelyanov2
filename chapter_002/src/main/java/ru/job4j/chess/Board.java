@@ -1,5 +1,6 @@
 package ru.job4j.chess;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 /**
@@ -34,11 +35,9 @@ public class Board {
             Predicate<Cell> predicate = p -> p.equals(figures[index].position);
             if (source != null && predicate.test(source)) {
             Cell[] route = figures[index].way(source, dest);
-                for (Cell busy: route) {
-                    if (busy != null && predicate.test(busy)) {
-                        throw  new OccupiedWayException("the route is busy");
-                    }
-                }
+                Arrays.stream(route).filter(busy -> busy != null && predicate.test(busy)).forEachOrdered(busy -> {
+                    throw new OccupiedWayException("the route is busy");
+                });
             } else {
                 throw new FigureNotFoundException("404 Figure not found");
             }
