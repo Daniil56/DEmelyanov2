@@ -65,6 +65,16 @@
              <artifactId>kotlin-stdlib</artifactId>
              <version>1.2.51</version>
          </dependency>
+         <dependency>
+             <groupId>org.openjfx</groupId>
+             <artifactId>javafx-controls</artifactId>
+             <version>11</version>
+         </dependency>
+         <dependency>
+             <groupId>org.openjfx</groupId>
+             <artifactId>javafx-fxml</artifactId>
+             <version>11</version>
+         </dependency>
      </dependencies>
 <build>
 <plugins>
