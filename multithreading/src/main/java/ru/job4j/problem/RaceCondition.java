@@ -12,7 +12,7 @@ public class RaceCondition {
         new RaceCondition().start();
 
     }
-    protected long count = 0;
+    private long count = 0;
 
     public void start() {
         new Thread(one).start();
@@ -30,19 +30,19 @@ public class RaceCondition {
             count += value;
     }
 
-    Runnable one = () ->  add(2);
+    private Runnable one = () ->  add(2);
 
-    Runnable two = () -> add(3);
+    private Runnable two = () -> add(3);
 
-    Runnable three = () -> add(4);
+    private Runnable three = () -> add(4);
 
-    Runnable four = () -> add(5);
+    private Runnable four = () -> add(5);
 
-    Runnable five = () -> add(6);
+    private Runnable five = () -> add(6);
 
-    Runnable six = () -> add(7);
+    private Runnable six = () -> add(7);
 
-    Runnable eight = () -> add(8);
+    private Runnable eight = () -> add(8);
 
-    Runnable nine = () -> add(9);
+    private Runnable nine = () -> add(9);
 }
