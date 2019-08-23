@@ -1,5 +1,5 @@
 package ru.job4j.container;
-import ru.job4j.list.FirstLastList;
+import ru.job4j.List.FirstLastList;
 
 public class SimpleStack<T> {
   private FirstLastList<T> list = new FirstLastList<>();

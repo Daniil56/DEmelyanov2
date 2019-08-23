@@ -2,6 +2,8 @@ package ru.job4j.list;
 
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
+import ru.job4j.List.Cycle;
+
 import static org.hamcrest.Matchers.is;
 
 public class CycleTest {

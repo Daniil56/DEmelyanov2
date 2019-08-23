@@ -3,9 +3,7 @@ package ru.job4j.list;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.Before;
-
-import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
+import ru.job4j.List.FirstLastList;
 
 import static org.hamcrest.Matchers.is;
 

@@ -2,13 +2,14 @@ package ru.job4j.list;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.List.SimpleArrayList;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
 
 public class SimpleArrayListTest {
 
-    private  SimpleArrayList<Integer> list;
+    private SimpleArrayList<Integer> list;
 
     @Before
     public void setUp() {
