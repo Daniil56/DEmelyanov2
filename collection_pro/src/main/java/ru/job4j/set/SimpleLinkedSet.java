@@ -1,6 +1,6 @@
 package ru.job4j.set;
 
-import ru.job4j.List.FirstLastList;
+import ru.job4j.list.FirstLastList;
 
 import java.util.Iterator;
 

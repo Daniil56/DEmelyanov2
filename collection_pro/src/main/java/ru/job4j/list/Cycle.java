@@ -1,4 +1,4 @@
-package ru.job4j.List;
+package ru.job4j.list;
 
 public class Cycle {
 
