@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Daniil56/DEmelyanov2.svg?branch=master)](https://travis-ci.org/Daniil56/DEmelyanov2)
-[![codecov](https://codecov.io/gh/Daniil56/DEmelyanov2/branch/master/graph/badge.svg)](https://codecov.io/gh/Daniil56/DEmelyanov2)
+[![codecov](https://codecov.ru.job4j.io/gh/Daniil56/DEmelyanov2/branch/master/graph/badge.svg)](https://codecov.ru.job4j.io/gh/Daniil56/DEmelyanov2)
 # Репозиторий Данила Емельянова
  <a href="http://job4j.ru"> <img src="http://job4j.ru/img/logomini.png"></a>
 
