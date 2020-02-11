@@ -1,15 +1,21 @@
 package ru.job4j.io;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.StringJoiner;
+import java.util.regex.Pattern;
 
 public class Config {
     private final String  path;
     private final Map<String, String> values = new HashMap<>();
 
+    public Map<String, String> getValues() {
+        return values;
+    }
 
     public Config(String path) {
         this.path = path;
@@ -17,8 +23,16 @@ public class Config {
 
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-
-
+            read.lines()
+                    .filter(Objects::nonNull)
+                    .filter(val -> !val.isEmpty())
+                    .filter(val -> !val.startsWith("#"))
+                    .forEach(val -> {
+                        String[] split = val.split(Pattern.quote("="));
+                        String k = split[0];
+                        String v = split[1];
+                        values.put(k.trim(), v.trim());
+                    });
         } catch (IOException e) {
             e.printStackTrace();
         }
