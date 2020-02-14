@@ -25,12 +25,12 @@ public class AnalizyTest {
         data.put("11:01:02", "500");
         data.put("11:02:02", "200");
         analizy.init(data);
-        analizy.unavailable();
+
         List<String> expect = new ArrayList<>();
         expect.add("10:57:01");
         expect.add("10:59:01");
         expect.add("11:01:02");
         expect.add("11:02:02");
-        assertThat(analizy.getUnavailableList(), is(expect));
+        assertThat(analizy.unavailable(), is(expect));
     }
 }
