@@ -11,7 +11,7 @@ import java.util.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class AnalizyTest {
+public class AnalysisTest {
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
@@ -21,11 +21,11 @@ public class AnalizyTest {
     public void whenUnavailableIntegrateRun() throws FileNotFoundException {
         String in = "src/main/resources/source.csv";
         String out = "src/main/resources/target.csv";
-        Analizy analizy = new Analizy(in, out);
+        Analysis analysis = new Analysis(in, out);
         Map<String, String> data = getDataMap();
-        analizy.init(data, new PrintWriter(out));
+        analysis.init(data, new PrintWriter(out));
         List<String> expect = getExpectedList();
-        assertThat(analizy.unavailable(), is(expect));
+        assertThat(analysis.unavailable(), is(expect));
     }
 
     @NotNull
@@ -51,10 +51,10 @@ public class AnalizyTest {
 
     @Test
     public void whenAddEdDataListToAnalizyInitThenFileSourceWellBeFill() throws IOException {
-        Analizy analizy = new Analizy(null, null);
+        Analysis analysis = new Analysis(null, null);
         File source = folder.newFile("source.txt");
         try (PrintWriter out = new PrintWriter(source)) {
-            analizy.init(getDataMap(), out);
+            analysis.init(getDataMap(), out);
         }
         List<String> initList = new ArrayList<>();
         List<String> acList = new ArrayList<>();
@@ -69,17 +69,17 @@ public class AnalizyTest {
     public void whenUnavaibleMockRunThenCreateInTmp() throws IOException {
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
-        Analizy analizy = new Analizy(null, null);
+        Analysis analysis = new Analysis(null, null);
         try (PrintWriter out = new PrintWriter(source)) {
-            analizy.init(getDataMap(), out);
+            analysis.init(getDataMap(), out);
         }
         try (PrintWriter in = new PrintWriter(target);
              BufferedReader reader = new BufferedReader(new FileReader(source))
              ) {
-            analizy.addUnavailableFromList(reader, in);
+            analysis.addUnavailableFromList(reader, in);
         }
         try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            assertThat(analizy.sourceWrite(analizy.getUnavailableList(), out), is(getExpectedList()));
+            assertThat(analysis.sourceWrite(analysis.getUnavailableList(), out), is(getExpectedList()));
         }
     }
 }

@@ -4,17 +4,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Analizy {
+public class Analysis {
     private final String pathIn;
     private final String pathOut;
     private final List<String> unavailableList = new ArrayList<>();
-    final AtomicBoolean server  = new AtomicBoolean(true);
 
 
-    public Analizy(String in, String out) {
+    public Analysis(String in, String out) {
         this.pathIn = in;
         this.pathOut = out;
     }
@@ -46,30 +43,33 @@ public class Analizy {
 
     public void addUnavailableFromList(BufferedReader readerIn, PrintWriter out) {
         final String[] join = {""};
-        readerIn.lines()
-                .filter(Objects::nonNull)
-                .filter(val -> !val.isEmpty())
-                .map(str -> str.split(" "))
-                .forEach(logg -> {
-                    int status = Integer.parseInt(logg[1]);
-                    String time = logg[0];
-                    if (server.get() && status == 500 || status == 400) {
-                        out.printf("%s;", time);
-                        join[0] = join[0].concat(time + ";");
-                        server.set(false);
-                    }
-                    if (!server.get() && status == 200 || status == 300) {
-                        out.printf("%s;\n", time);
-                        join[0] = join[0].concat(time + ";\n");
-                        server.set(true);
-                    }
-                });
+        try {
+            var line = "";
+            boolean server = true;
+           while ((line = readerIn.readLine()) != null) {
+               var log = line.split(" ");
+               int status = Integer.parseInt(log[1]);
+               var time = log[0];
+               if (server && status == 500 || status == 400) {
+                   out.printf("%s;", time);
+                   join[0] = join[0].concat(time + ";");
+                   server = false;
+               }
+               if (!server && status == 200 || status == 300) {
+                   out.printf("%s;\n", time);
+                   join[0] = join[0].concat(time + ";\n");
+                   server = true;
+               }
+           }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         unavailableList.add(join[0]);
     }
 
     public List<String> sourceWrite(List<String> unavailableList, PrintWriter inWrite) {
         List<String> result = new ArrayList<>();
-        unavailableList.stream().map(str -> str.split(";\n")).map(Analizy::apply).forEach(period -> {
+        unavailableList.stream().map(str -> str.split(";\n")).map(Analysis::apply).forEach(period -> {
             result.add(period[0][0]);
             result.add(period[0][period[0].length - 1]);
             inWrite.printf("%s;%s;%n", period[0][0], period[0][period[0].length - 1]);
