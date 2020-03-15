@@ -8,7 +8,8 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class Search {
-    List<File> files(String parent, Predicate<String> condition) {
+
+   public List<File> files(String parent, Predicate<String> condition) {
         List<File> result = new ArrayList<>();
         File root = new File(parent);
         Queue<Tree<File>> queue = new ArrayDeque<>();
