@@ -39,7 +39,7 @@ public class Args {
     }
 
     private Map<String, String> createMapFromArgs(String[] args) {
-        Map<String, String> result = new HashMap<>(args.length/2);
+        Map<String, String> result = new HashMap<>(args.length / 2);
         IntStream.range(0, args.length).filter(i -> i % 2 == 0).forEach(i -> {
             var key = args[i];
             var value = args[i + 1];
