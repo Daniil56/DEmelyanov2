@@ -3,6 +3,8 @@ package ru.job4j.io;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import ru.job4j.io.zip.Args;
+import ru.job4j.io.zip.Zip;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,8 +38,6 @@ public class SearchTest {
         List<File> actual = first.files(folder.getRoot().getPath(), conditional);
         List<File> expected = List.of(firstTxt, thirdTxt, one, two, twoChild);
         assertThat(actual, is(expected));
-
-
     }
 
 }

@@ -11,10 +11,13 @@ import java.util.zip.ZipOutputStream;
 public class Zip {
     private final Args args;
     private final List<File> excludeFiles;
+    private final Search search;
 
     public Zip(Args args) {
         this.excludeFiles = new ArrayList<>();
         this.args = args;
+        search = new Search();
+
     }
 
     public void pack(List<File> sources, File target) {
@@ -32,38 +35,18 @@ public class Zip {
         }
     }
 
-        private List<File> directoryList() {
-        List<File>  result = new ArrayList<>();
-        Queue<File> queue = new ArrayDeque<>();
-        List<File>  checked = new LinkedList<>();
-        if (args.directory().isDirectory()) {
-            File[] files = args.directory().listFiles();
-            queue.addAll(Arrays.asList(Objects.requireNonNull(files)));
-            while (!queue.isEmpty()) {
-                File current = queue.remove();
-                if (current.isDirectory()) {
-                    File[] childList = current.listFiles();
-                    queue.addAll(Arrays.asList(Objects.requireNonNull(childList)));
-                } else if (!checked.contains(current)) {
-                    result.add(current);
-                    checked.add(current);
-                }
-            }
-        }
-        return result;
-    }
-
 
     public void seekBy(String root, String ext) {
         StringBuilder builder = new StringBuilder(ext);
         builder.deleteCharAt(0);
         Predicate<String> conditional = s -> s.endsWith(builder.toString());
-         excludeFiles.addAll(new Search().files(root, conditional));
+         excludeFiles.addAll(this.search.files(root, conditional));
     }
 
     public static void main(String[] args) {
-        Zip zip = new Zip(new Args(args));
+        Args arg = new Args(args);
+        Zip zip = new Zip(arg);
         zip.seekBy(zip.args.directory().getPath(), zip.args.exclude());
-        zip.pack(zip.directoryList(), zip.args.output());
+        zip.pack(zip.search.files(arg.directory().getPath(), s -> true), zip.args.output());
     }
 }
