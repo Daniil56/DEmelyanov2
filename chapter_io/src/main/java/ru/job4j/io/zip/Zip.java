@@ -10,14 +10,11 @@ import java.util.zip.ZipOutputStream;
 
 public class Zip {
     private final Args args;
-    private final List<File> excludeFiles;
-    private final Search search;
+    private final List<File> excludeFiles = new ArrayList<>();
+    private final Search search = new Search();
 
     public Zip(Args args) {
-        this.excludeFiles = new ArrayList<>();
         this.args = args;
-        search = new Search();
-
     }
 
     public void pack(List<File> sources, File target) {
