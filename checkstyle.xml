@@ -72,7 +72,12 @@
         <module name="EqualsHashCode"/>
         <!--<module name="HiddenField"/>-->
         <module name="IllegalInstantiation"/>
-        <module name="InnerAssignment"/>
+        <module name="InnerAssignment">
+            <property name="id" value="checkstyle:innerassignment"/>
+            <property name="severity" value="ignore"/>
+            <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+        </module>
+
         <!--<module name="MagicNumber"/>-->
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>
