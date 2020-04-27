@@ -1,14 +1,12 @@
 package ru.job4j.io.encod;
 
-import ru.job4j.io.encod.output.Output;
-
 import java.io.IOException;
-
+@FunctionalInterface
 public interface ChatAction {
     /**
      *
      * @param out output
      * @param key input key
      */
-    void execute(Output out, String key) throws IOException;
+    void execute(Bot out, String key) throws IOException;
 }

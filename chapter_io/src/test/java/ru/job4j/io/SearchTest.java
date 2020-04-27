@@ -1,19 +1,17 @@
 package ru.job4j.io;
 
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import ru.job4j.io.zip.Args;
-import ru.job4j.io.zip.Zip;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.function.Predicate;
 
+import org.junit.Test;
+
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class SearchTest {
     @Rule
